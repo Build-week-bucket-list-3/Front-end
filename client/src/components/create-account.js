@@ -23,11 +23,25 @@ const CreateAccount = (props) => {
             
        );
     } 
-   
+    function pwdCheck(pwd, check){
+        if(pwd === check){
+            return {
+                name: userData.username,
+                email: userData.email,
+                password: userData.password
+
+
+            }
+        }else{
+            
+            return alert("Password to not match");
+            
+        }
+    }
     function handelSubmit(event){
         event.preventDefault();
         
-        axios.post('',userData).then((resp) => {
+        axios.post('', pwdCheck(userData.password, userData.confirmPassword)).then((resp) => {
 
 
         }
