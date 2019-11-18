@@ -10,10 +10,10 @@ const CreateAccount = (props) => {
         password: '',
         confirmPassword: ''
     });
+    const [data, setData] = useState({})
     // functions for forms
     function handleChange(event){
-        const eventName = event.target.name;
-        const eventValue = event.target.value;
+        
         // console.log(Key);
         
        
@@ -33,24 +33,32 @@ const CreateAccount = (props) => {
 
             }
         }else{
-            
-            return alert("Password to not match");
+            alert("Password to not match");
+            return false;
             
         }
     }
+
+
     function handelSubmit(event){
         event.preventDefault();
-        
-        axios.post('', pwdCheck(userData.password, userData.confirmPassword)).then((resp) => {
-
-
+        setData(pwdCheck(userData.password, userData.confirmPassword));
+        if (data !== false){
+            return data;
         }
-        ).catch(error => console.log(`error: ${error}`));
-    
-    
+          
     }
 
+    useEffect(()=>{
+        console.log(data);
+        if(data !== false){
+            axios.post('',data).then((resp)=>{
+                console.log(resp);
+            }).catch((error => console.log(error)));
 
+            
+        }
+    },[data]);
 
 
     return (

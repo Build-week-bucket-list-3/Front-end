@@ -1,15 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './components/Header';
-import CreateAccount from './components/create-account';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import SignIn from "./components/SignIn";
+import CreateAccount from "./components/CreateAccount";
+import CreateBucketListItem from './components/CreateBucketListItem';
 
 function App() {
   return (
-    <div className="App">
-      {/* <Header /> */}
-      <CreateAccount />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <SignIn />
+        <CreateAccount />
+        <CreateBucketListItem />
+      </div>
+    </Router>
   );
 }
 
