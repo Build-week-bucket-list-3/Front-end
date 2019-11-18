@@ -22,7 +22,7 @@ const CreateAccount = (props) => {
             {...userData, [event.target.name]: event.target.value}
             
        );
-    }
+    } 
    
     function handelSubmit(event){
         event.preventDefault();
