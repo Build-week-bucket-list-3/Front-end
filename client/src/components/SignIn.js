@@ -1,68 +1,69 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const SignIn = props => {
-  const [userData, setUserData] = useState({
-    email: "",
-    password: ""
+  const [userCredentials, setUserCredentials] = useState({
+    email: '',
+    password: ''
   });
 
-  function handleChange(event) {
-    const eventName = event.target.name;
-    const eventValue = event.target.value;
+  const history = useHistory();
 
-    return setUserData({
-      ...userData,
-      [event.target.name]: event.target.value
+  const handleChange = event => {
+    setUserCredentials({
+      ...userCredentials,
+      [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
+    const endpoint = '/login';
 
-    axios
-      .post("", userData)
-      .then(res => {})
-      .catch(error => console.log(`error: ${error}`));
-  }
+    axiosWithAuth()
+      .post(endpoint, userCredentials)
+      .then(response => {
+        const token = response.data.payload;
+        sessionStorage.setItem('token', token);
+        history.push('users/bucketlists/all')
+      })
+      .catch(error => console.log('login error', error))
+  };
 
   return (
-    <div className="sign-in">
+    <div className='sign-in'>
       <div>
         <h2>Sign in</h2>
-        <p>
-          or{" "}
-          <span>
-            <a href="#">create a account</a>
-          </span>
+        <p>or&nbsp;
+          <a href='/signup'>create an account</a>
         </p>
       </div>
       <form onSubmit={handleSubmit}>
-    
+
         <div className='form-group'>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor='email'>Email Address</label>
           <input
             className='form-control'
-            type="text"
-            name="email"
-            id="email"
+            type='text'
+            name='email'
             onChange={handleChange}
-            value={userData.email}
+            value={userCredentials.email}
           />
         </div>
         <div className='form-group'>
           <label htmlFor="password">Password</label>
           <input
             className='form-control'
-            type="password"
-            name="password"
-            id="password"
+            type='password'
+            name='password'
             onChange={handleChange}
-            value={userData.password}
+            value={userCredentials.password}
           />
         </div>
-        <button className='btn btn-primary'>Sign In</button>
-    
+        <div className='form-group'>
+          <button className='btn btn-primary'>Sign In</button>
+        </div>
       </form>
     </div>
   );
