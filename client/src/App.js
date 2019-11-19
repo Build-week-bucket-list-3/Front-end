@@ -8,6 +8,7 @@ import CreateBucketListItem from './components/CreateBucketListItem';
 import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/EditBucketList";
 import GlobalStyles from "./style/GlobalStyles";
+import AddEntry from "./components/AddEntry";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <CreateBucketListItem />
           <hr />
           <BucketListEdit />
+          <hr />
+          <AddEntry />
         </div>
       </div>
     </Router>

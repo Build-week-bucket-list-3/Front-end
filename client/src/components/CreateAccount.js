@@ -4,17 +4,35 @@ import axios from 'axios';
 
 
 const CreateAccount = (props) => {
-  
+
+    const [sendData, setSendData] = useState({});
     const {register, handleSubmit, watch, errors } = useForm();
     const onSubmit = async data => {
+        if(data.password === data.confirmPassword){
+
+            setSendData({
+                'username': data.username,
+                'password': data.password,
+                'email': data.email
+
+            })
+            console.log(sendData);
+
+        }
         
-        console.log(data)
+       
+        
         
     };
+    
 
-    // useEffect(()=>{
-
-    // },[]);
+    
+        useEffect(()=>{
+            axios.post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", sendData ).then(response => {
+                console.log(response);
+            }).catch(error => console.log(error));
+        },[sendData]);
+    
 
     return (
 
@@ -39,7 +57,7 @@ const CreateAccount = (props) => {
                 <label htmlFor='password'>Password</label>
                 <input className='form-control' type='password' name='password' id='password'ref={register({required:true, minLength: 4})} />
                 <label htmlFor='confirmPassword'>Confirm Password</label>
-                <input className='form-control' type='password' name='confirmPassword' id='confirmPassword' ref={register({required:true, minLength: 4})} />
+                <input className='form-control' type='password' name='confirmPassword' id='confirmPassword' ref={register({required:true, minLength: 4})}/>
                 </div>
                 <button className='btn btn-primary'>Create Accout</button>
             </form>
