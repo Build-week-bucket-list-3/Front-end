@@ -6,15 +6,24 @@ import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
 import CreateBucketList from "./components/create-bucket-list";
 import BucketListEdit from "./components/bucket-list-edit";
+import GlobalStyles from "./style/GlobalStyles";
+
 function App() {
   return (
     <Router>
       <div className="App">
+        <GlobalStyles />
         <Header />
         <SignIn />
         <CreateAccount />
         <CreateBucketList />
         <BucketListEdit />
+        <div className='container'>
+          <SignIn />
+          <CreateAccount />
+          <CreateBucketList />
+          <BucketListEdit />
+        </div>
       </div>
     </Router>
   );
