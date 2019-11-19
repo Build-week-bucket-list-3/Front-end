@@ -14,7 +14,7 @@ export default function AddEntry() {
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
-                        <textarea className="from-controle" name="description" id='description' placeholder='Enter description' ref={register({})}></textarea>
+                        <textarea className="form-control" name="description" id='description' placeholder='Enter description' ref={register({})}></textarea>
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Submit</button>
