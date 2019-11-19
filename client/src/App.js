@@ -6,7 +6,7 @@ import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
 import CreateBucketListItem from './components/CreateBucketListItem';
 import CreateBucketList from "./components/CreateBucketList";
-import BucketListEdit from "./components/bucket-list-edit";
+import BucketListEdit from "./components/EditBucketList";
 import GlobalStyles from "./style/GlobalStyles";
 
 function App() {
