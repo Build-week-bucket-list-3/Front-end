@@ -14,10 +14,6 @@ function App() {
       <div className="App">
         <GlobalStyles />
         <Header />
-        <SignIn />
-        <CreateAccount />
-        <CreateBucketList />
-        <BucketListEdit />
         <div className='container'>
           <SignIn />
           <CreateAccount />
