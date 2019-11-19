@@ -63,7 +63,7 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.privacy}
             />
-            <label className="form-check-label" htmlFor="privacy">public</label>
+            <label className="form-check-label" htmlFor="privacy">Public</label>
           </div>
           <div className="form-check">
             <input
@@ -74,7 +74,7 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.privacy}
             />
-            <label className="form-check-label" htmlFor="private">private</label>
+            <label className="form-check-label" htmlFor="private">Private</label>
           </div>
         </div>
         <div className='form-group'>
