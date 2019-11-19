@@ -3,12 +3,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Header from "./components/Header";
 import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
-import CreateBucketListItem from './components/CreateBucketListItem';
+import CreateBucketListItem from "./components/CreateBucketListItem";
 import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/EditBucketList";
 import ShareBucketList from "./components/ShareBucketList";
 import GlobalStyles from "./style/GlobalStyles";
-
+import ViewBucketListItems from "./components/ViewBucketListItems";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <hr />
           <BucketListEdit />
           <ShareBucketList />
+          <ViewBucketListItems />
         </div>
       </div>
     </Router>
