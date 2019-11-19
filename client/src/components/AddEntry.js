@@ -1,12 +1,13 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 
-const {register, handleSubmit, errors } = useForm();
-const onSubmit = async data => {
 
-}
 
 export default function AddEntry(){
+    const {register, handleSubmit, errors } = useForm();
+    const onSubmit = async data => {
+
+}
     return (
         <>
         <div><h2>Entry Name</h2></div>

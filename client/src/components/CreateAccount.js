@@ -27,11 +27,11 @@ const CreateAccount = (props) => {
     
 
     
-        useEffect(()=>{
-            axios.post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", sendData ).then(response => {
-                console.log(response);
-            }).catch(error => console.log(error));
-        },[sendData]);
+        // useEffect(()=>{
+        //     axios.post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", sendData ).then(response => {
+        //         console.log(response);
+        //     }).catch(error => console.log(error));
+        // },[sendData]);
     
 
     return (

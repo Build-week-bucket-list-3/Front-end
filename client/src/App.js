@@ -9,6 +9,7 @@ import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/EditBucketList";
 import GlobalStyles from "./style/GlobalStyles";
 import AddEntry from "./components/AddEntry";
+import BucketList from "./components/BucketList";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <BucketListEdit />
           <hr />
           <AddEntry />
+          <hr />
+          <BucketList />
         </div>
       </div>
     </Router>
