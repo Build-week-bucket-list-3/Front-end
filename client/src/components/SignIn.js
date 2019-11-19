@@ -36,7 +36,7 @@ const SignIn = props => {
       <div>
         <h2>Sign in</h2>
         <p>or&nbsp;
-          <a href='/create'>create a account</a>
+          <a href='/signup'>create a account</a>
         </p>
       </div>
       <form onSubmit={handleSubmit}>

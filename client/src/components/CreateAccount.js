@@ -19,7 +19,7 @@ const CreateAccount = (props) => {
     return (
 
         <div className='create-account-container'>
-            <h2>Create an account</h2>
+            <h2>Create your account</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
