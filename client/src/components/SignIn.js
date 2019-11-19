@@ -22,7 +22,7 @@ const SignIn = props => {
 
     axios
       .post("", userData)
-      .then(res => {})
+      .then(res => { })
       .catch(error => console.log(`error: ${error}`));
   }
 
@@ -38,23 +38,29 @@ const SignIn = props => {
         </p>
       </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email Address</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          onChange={handleChange}
-          value={userData.email}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleChange}
-          value={userData.password}
-        />
-        <button>Sign In</button>
+        <div className='form-group'>
+          <label htmlFor="email">Email Address</label>
+          <input
+            className='form-control'
+            type="text"
+            name="email"
+            id="email"
+            onChange={handleChange}
+            value={userData.email}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="password">Password</label>
+          <input
+            className='form-control'
+            type="password"
+            name="password"
+            id="password"
+            onChange={handleChange}
+            value={userData.password}
+          />
+        </div>
+        <button className='btn btn-primary'>Sign In</button>
       </form>
     </div>
   );

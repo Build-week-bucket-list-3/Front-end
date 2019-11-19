@@ -5,14 +5,19 @@ import Header from "./components/Header";
 import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
 import CreateBucketList from "./components/create-bucket-list";
+import GlobalStyles from "./style/GlobalStyles";
+
 function App() {
   return (
     <Router>
       <div className="App">
+        <GlobalStyles />
         <Header />
-        <SignIn />
-        <CreateAccount />
-        <CreateBucketList />
+        <div className='container'>
+          <SignIn />
+          <CreateAccount />
+          <CreateBucketList />
+        </div>
       </div>
     </Router>
   );
