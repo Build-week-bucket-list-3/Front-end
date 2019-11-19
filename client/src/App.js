@@ -17,9 +17,13 @@ function App() {
         <Header />
         <div className='container'>
           <SignIn />
+          <hr />
           <CreateAccount />
+          <hr />
           <CreateBucketList />
+          <hr />
           <CreateBucketListItem />
+          <hr />
           <BucketListEdit />
         </div>
       </div>
