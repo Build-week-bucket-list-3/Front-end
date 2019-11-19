@@ -6,7 +6,9 @@ import CreateAccount from "./components/CreateAccount";
 import CreateBucketListItem from './components/CreateBucketListItem';
 import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/EditBucketList";
+import ShareBucketList from "./components/ShareBucketList";
 import GlobalStyles from "./style/GlobalStyles";
+
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
       <div className="App">
         <GlobalStyles />
         <Header />
-        <div className='container'>
+        <div className="container">
           <SignIn />
           <hr />
           <CreateAccount />
@@ -24,6 +26,7 @@ function App() {
           <CreateBucketListItem />
           <hr />
           <BucketListEdit />
+          <ShareBucketList />
         </div>
       </div>
     </Router>
