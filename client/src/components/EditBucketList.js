@@ -29,18 +29,20 @@ export default function BucketListEdit() {
           <label className="form-check-label" htmlFor="goalcompleted">Goal Completed</label>
         </div>
       </div>
-      <h3>Date:</h3>
-      {ShowText && (
-        <textarea
-          className="journal"
-          id="journal1"
-          name="EditJournal"
-          ref={register}
-        ></textarea>
-      )}
-      <button className='btn btn-secondary' onClick={() => setShowText(!ShowText)}>X</button>
+      <div className='form-group'>
+        <h3>Date:</h3>
+        {ShowText && (
+          <textarea
+            className="form-control"
+            id="journal1"
+            name="EditJournal"
+            ref={register}
+          ></textarea>
+        )}
+        <button className='btn btn-secondary' onClick={() => setShowText(!ShowText)}>X</button>
 
-      <input className='btn btn-primary' type="submit" value="save" />
+        <input className='btn btn-primary' type="submit" value="save" />
+      </div>
     </form>
   );
 }
