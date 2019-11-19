@@ -8,7 +8,7 @@ export default function CreateBucketListItem() {
 
     return (
         <div>
-            <h2>Create A Bucket List Item</h2>
+            <h2>Create Bucket List Item</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='form-group'>
                     <label htmlFor='name'>Name</label>

@@ -27,7 +27,7 @@ const CreateBucketList = props => {
 
   return (
     <div className="create-account-container">
-      <h2>Create A Bucket List:</h2>
+      <h2>Create Bucket List</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Username</label>
