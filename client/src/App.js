@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
 import Header from "./components/Header";
 import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
-import CreateBucketListItem from "./components/CreateBucketListItem";
-import CreateBucketList from "./components/create-bucket-list";
-import BucketListEdit from "./components/bucket-list-edit";
+import CreateBucketListItem from './components/CreateBucketListItem';
+import CreateBucketList from "./components/CreateBucketList";
+import BucketListEdit from "./components/EditBucketList";
+import ShareBucketList from "./components/ShareBucketList";
 import GlobalStyles from "./style/GlobalStyles";
-import ShareBucketList from "./components/share-bucket-list";
+
 
 function App() {
   return (
@@ -18,9 +18,13 @@ function App() {
         <Header />
         <div className="container">
           <SignIn />
+          <hr />
           <CreateAccount />
+          <hr />
           <CreateBucketList />
+          <hr />
           <CreateBucketListItem />
+          <hr />
           <BucketListEdit />
           <ShareBucketList />
         </div>

@@ -37,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     a {
-        color: inherit;
+        color: #027fa7;
         text-decoration: none;
     }
     img {
@@ -75,6 +75,8 @@ const GlobalStyles = createGlobalStyle`
     .container {
         max-width: 682px;
         margin: 0 auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
 /* Header */
@@ -143,6 +145,19 @@ const GlobalStyles = createGlobalStyle`
     label {
         display: inline-block;
         margin-bottom: .5rem;
+    }
+    .form-check {
+        position: relative;
+        display: block;
+        padding-left: 1.25rem;
+    }
+    .form-check-input {
+        position: absolute;
+        margin-top: .3rem;
+        margin-left: -1.25rem;
+    }
+    .form-check-label {
+        margin-bottom: 0;
     }
 
 /* Buttons */
