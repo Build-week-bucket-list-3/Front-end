@@ -37,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     a {
-        color: inherit;
+        color: #027fa7;
         text-decoration: none;
     }
     img {
@@ -75,6 +75,8 @@ const GlobalStyles = createGlobalStyle`
     .container {
         max-width: 682px;
         margin: 0 auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
 /* Header */
