@@ -144,6 +144,19 @@ const GlobalStyles = createGlobalStyle`
         display: inline-block;
         margin-bottom: .5rem;
     }
+    .form-check {
+        position: relative;
+        display: block;
+        padding-left: 1.25rem;
+    }
+    .form-check-input {
+        position: absolute;
+        margin-top: .3rem;
+        margin-left: -1.25rem;
+    }
+    .form-check-label {
+        margin-bottom: 0;
+    }
 
 /* Buttons */
     .btn {

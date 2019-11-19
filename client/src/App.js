@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
 import CreateBucketListItem from './components/CreateBucketListItem';
-import CreateBucketList from "./components/create-bucket-list";
+import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/bucket-list-edit";
 import GlobalStyles from "./style/GlobalStyles";
 
