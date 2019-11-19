@@ -22,7 +22,7 @@ const SignIn = props => {
 
     axios
       .post("", userData)
-      .then(res => { })
+      .then(res => {})
       .catch(error => console.log(`error: ${error}`));
   }
 
@@ -38,6 +38,7 @@ const SignIn = props => {
         </p>
       </div>
       <form onSubmit={handleSubmit}>
+    
         <div className='form-group'>
           <label htmlFor="email">Email Address</label>
           <input
@@ -61,6 +62,7 @@ const SignIn = props => {
           />
         </div>
         <button className='btn btn-primary'>Sign In</button>
+    
       </form>
     </div>
   );
