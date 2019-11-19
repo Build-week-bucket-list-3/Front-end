@@ -61,8 +61,9 @@ const SignIn = props => {
             value={userCredentials.password}
           />
         </div>
-        <button className='btn btn-primary'>Sign In</button>
-
+        <div className='form-group'>
+          <button className='btn btn-primary'>Sign In</button>
+        </div>
       </form>
     </div>
   );
