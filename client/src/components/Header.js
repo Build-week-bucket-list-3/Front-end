@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header className='header'>
-            <h1>Bucket List</h1>
+        <header className='navbar'>
+            <h1 className='navbar-brand'>Bucket List</h1>
             <nav>
-                <Link to='/'>My Bucket Lists</Link>
-                <Link to='/create'>Create a Bucket List</Link>
+                <NavLink className='nav-link' to='/'>My Bucket Lists</NavLink>
+                <NavLink className='nav-link' to='/create'>Create a Bucket List</NavLink>
             </nav>
-            <Link to='/' className='sign-out'>Sign out</Link>
+            <Link to='/' className='nav-signout'>Sign out</Link>
         </header>
     )
 }
