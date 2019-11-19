@@ -4,10 +4,11 @@ import "./App.css";
 import Header from "./components/Header";
 import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
-import CreateBucketListItem from './components/CreateBucketListItem';
+import CreateBucketListItem from "./components/CreateBucketListItem";
 import CreateBucketList from "./components/create-bucket-list";
 import BucketListEdit from "./components/bucket-list-edit";
 import GlobalStyles from "./style/GlobalStyles";
+import ShareBucketList from "./components/share-bucket-list";
 
 function App() {
   return (
@@ -15,12 +16,13 @@ function App() {
       <div className="App">
         <GlobalStyles />
         <Header />
-        <div className='container'>
+        <div className="container">
           <SignIn />
           <CreateAccount />
           <CreateBucketList />
           <CreateBucketListItem />
           <BucketListEdit />
+          <ShareBucketList />
         </div>
       </div>
     </Router>
