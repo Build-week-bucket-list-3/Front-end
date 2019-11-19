@@ -5,16 +5,31 @@ import axios from 'axios';
 
 const CreateAccount = (props) => {
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    const [sendData, setSendData] = useState({});
+    const {register, handleSubmit, watch, errors } = useForm();
     const onSubmit = async data => {
+        if(data.password === data.confirmPassword){
 
-        console.log(data)
+            setSendData({
+                'username': data.username,
+                'password': data.password,
+                'email': data.email
+
+            })
+            console.log(sendData);
+
+        }
 
     };
+    
 
-    // useEffect(()=>{
-
-    // },[]);
+    
+        useEffect(()=>{
+            axios.post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", sendData ).then(response => {
+                console.log(response);
+            }).catch(error => console.log(error));
+        },[sendData]);
+    
 
     return (
 

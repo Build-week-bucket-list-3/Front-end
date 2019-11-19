@@ -8,6 +8,7 @@ import CreateBucketList from "./components/CreateBucketList";
 import BucketListEdit from "./components/EditBucketList";
 import ShareBucketList from "./components/ShareBucketList";
 import GlobalStyles from "./style/GlobalStyles";
+import AddEntry from "./components/AddEntry";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           <CreateBucketListItem />
           <hr />
           <BucketListEdit />
+          <hr />
+          <AddEntry />
+          <hr />
           <ShareBucketList />
         </div>
       </div>
