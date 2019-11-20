@@ -29,7 +29,7 @@ const Card = Styled.div`
 
 
 export default function BucketList(){
-    const [buketData, setBucketData] = useState([]);
+    const [bucketData, setBucketData] = useState([]);
     useEffect(()=>{
         Axios().then(resp => {
             console.log(resp);
