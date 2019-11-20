@@ -10,6 +10,7 @@ import EditBucketList from './components/EditBucketList';
 import ShareBucketList from './components/ShareBucketList';
 import AddEntry from './components/AddEntry';
 import BucketList from "./components/BucketList";
+import ViewBucketListItems from "./components/ViewBucketListItems";
 
 import { GlobalStyles } from './style/GlobalStyles';
 import { PrivateRoute } from './utils/PrivateRoute';
@@ -29,6 +30,7 @@ function App() {
           <PrivateRoute path='/bucketlist/edit' component={EditBucketList} />
           <PrivateRoute path='/bucketlist/add' component={AddEntry} />
           <PrivateRoute path='/bucketlist/share' component={ShareBucketList} />
+          <PrivateRoute path='/bucketlist/view' component={ViewBucketListItems} />
         </div>
       </div>
     </Router>

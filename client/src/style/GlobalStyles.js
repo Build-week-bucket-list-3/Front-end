@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components/macro';
+import { createGlobalStyle } from "styled-components/macro";
 
 export const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Exo:500&display=swap');
@@ -198,4 +198,14 @@ export const GlobalStyles = createGlobalStyle`
         background-color: #00a3d8;
         border-color: #009bcd;
     }
+    .btn-secondary {
+        color: #027FA7;
+        border: 3px solid #027FA7;
+    }
+    .btn-secondary:hover {
+        color: #fff;
+        background-color: #00a3d8;
+        border-color: #009bcd;
 `;
+
+export default GlobalStyles;
