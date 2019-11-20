@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import axios from 'axios';
 
 
 const CreateAccount = (props) => {
 
-    const [sendData, setSendData] = useState({});
+    const [userCredentials, setUserCredentials] = useState({});
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = async data => {
         if (data.password === data.confirmPassword) {
 
-            setSendData({
+            setUserCredentials({
                 'username': data.username,
                 'password': data.password,
                 'email': data.email
 
             })
-            console.log(sendData);
 
         }
 
     };
 
     useEffect(() => {
-        axiosWithAuth()
-            .post("/auth/register", sendData)
+        axios
+            .post("https://gcgsauce-bucketlist.herokuapp.com/createnew", userCredentials)
             .then(response => {
-                console.log(response);
+                console.log("create account response", response.data);
             })
             .catch(error => console.log(error));
-    }, [sendData]);
+    }, [userCredentials]);
 
     return (
         <div className='create-account-container'>

@@ -25,7 +25,7 @@ const SignIn = props => {
     axios().post(endpoint, `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`)
       .then(response => {
         console.log("login response", response.data);
-        const token = response.data.token;
+        const token = response.data.access_token;
         sessionStorage.setItem('token', token);
         // once token is handeled, navigate to XXX page
         history.push('users/bucketlists/all')
