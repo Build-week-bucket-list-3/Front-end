@@ -28,7 +28,7 @@ const SignIn = props => {
         const token = response.data.access_token;
         sessionStorage.setItem('token', token);
         // once token is handeled, navigate to XXX page
-        history.push('users/bucketlists/all')
+        history.push('/bucketlists')
       })
       .catch(error => console.log('login error', error.response));
 

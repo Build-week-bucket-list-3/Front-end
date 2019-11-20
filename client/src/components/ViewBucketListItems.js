@@ -61,7 +61,7 @@ const ViewBucketListItems = () => {
       <Row1>
         <Card className="card">
           <Img>
-            <img src="images/australia.jpg" />
+            <img src="../images/australia.jpg" />
           </Img>
           <h4>Visit Australia</h4>
           <p>Private</p>
@@ -70,7 +70,7 @@ const ViewBucketListItems = () => {
 
         <Card className="card">
           <Img>
-            <img src="images/england.jpg" />
+            <img src="../images/england.jpg" />
           </Img>
           <h4>Visit England</h4>
           <p>Private</p>
@@ -79,7 +79,7 @@ const ViewBucketListItems = () => {
 
         <Card className="card">
           <Img>
-            <img src="images/greece.jpg" />
+            <img src="../images/greece.jpg" />
           </Img>
           <h4>Visit Greece</h4>
           <p>Private</p>
@@ -89,7 +89,7 @@ const ViewBucketListItems = () => {
       <Row2>
         <Card className="card">
           <Img>
-            <img src="images/paris.jpg" />
+            <img src="../images/paris.jpg" />
           </Img>
           <h4>Visit Paris</h4>
           <p>Public</p>
@@ -98,7 +98,7 @@ const ViewBucketListItems = () => {
 
         <Card className="card">
           <Img>
-            <img src="images/ireland.jpg" />
+            <img src="../images/ireland.jpg" />
           </Img>
           <h4>Visit Ireland</h4>
           <p>Private</p>
@@ -107,7 +107,7 @@ const ViewBucketListItems = () => {
 
         <Card className="card">
           <Img>
-            <img src="images/mexico.jpg" />
+            <img src="../images/mexico.jpg" />
           </Img>
           <h4>Visit Mexico</h4>
           <p>Private</p>
