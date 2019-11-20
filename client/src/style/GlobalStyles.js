@@ -200,6 +200,7 @@ export const GlobalStyles = createGlobalStyle`
     .btn-secondary {
         color: #027FA7;
         border: 3px solid #027FA7;
+        width:100%
     }
     .btn-secondary:hover {
         color: #fff;
