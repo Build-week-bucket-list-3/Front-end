@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/Header';
 import UserLogin from './components/SignIn';
 import UserRegistration from "./components/CreateAccount";
-import BucketLists from "./components/BucketList";
+import BucketLists from "./components/BucketLists";
 import CreateBucketList from './components/CreateBucketList';
 import CreateBucketListItem from './components/CreateBucketListItem';
 import ViewBucketListItems from "./components/ViewBucketListItems";
