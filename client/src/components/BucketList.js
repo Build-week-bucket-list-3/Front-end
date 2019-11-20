@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -38,6 +38,15 @@ export default function BucketList() {
 
     }, []);
 
+    function getBucketList(event) {
+        event.preventDefault();
+
+        axiosWithAuth()
+            .get("/users/all")
+            .then(res => console.log(res))
+            .catch(err => console.log(err.message));
+    }
+
     return (
         <>
             <h2>My Bucket List</h2>
@@ -65,7 +74,7 @@ export default function BucketList() {
                     </Link>
                 </Card>
 
-
+                <button onClick={getBucketList}>Test</button>
             </ListContainer>
         </>
 
