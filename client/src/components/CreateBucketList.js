@@ -1,28 +1,44 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const CreateBucketList = props => {
   const [userData, setUserData] = useState({
-    name: ""
+    name: "",
+    shareable: false
   });
 
   function handleChange(event) {
-    const eventName = event.target.name;
-    const eventValue = event.target.value;
+    const value = event.target.name === 'shareable' ? !userData.shareable : event.target.value;
 
-    return setUserData({
+    setUserData({
       ...userData,
-      [event.target.name]: event.target.value
+      [event.target.name]: value
     });
   }
+
+  console.log(userData);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    axios
-      .post("", userData)
-      .then(resp => { })
+    const payload = {
+      "bucketlistName": userData.name,
+      "shareable": JSON.stringify(userData.shareable)
+    }
+
+    axiosWithAuth()
+      .post("/users/bucketlist", payload)
+      .then(resp => console.log(resp))
       .catch(error => console.log(`error: ${error}`));
+  }
+
+  function getBucketList(event) {
+    event.preventDefault();
+
+    axiosWithAuth()
+      .get("/users/all")
+      .then(res => console.log(res))
+      .catch(err => console.log(err.message));
   }
 
   return (
@@ -30,58 +46,37 @@ const CreateBucketList = props => {
       <h2>Create Bucket List</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Username</label>
+          <label htmlFor="name">Name</label>
           <input
             className="form-control"
             type="text"
             name="name"
-            id="name"
             onChange={handleChange}
-            value={userData.username}
+            value={userData.name}
           />
-          {console.log(userData)}
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            className="form-control"
-            type="text"
-            name="email"
-            id="email"
-            onChange={handleChange}
-            value={userData.email}
-          />
+          {console.log('user data', userData)}
         </div>
         <div className="form-group">
           <div className="form-check">
             <input
               className="form-check-input"
-              type="radio"
-              name="privacy"
-              id="public"
-              value="Public"
+              type="checkbox"
+              name="shareable"
               onChange={handleChange}
-              value={userData.privacy}
+              value={userData.shareable}
             />
-            <label className="form-check-label" htmlFor="privacy">public</label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="privacy"
-              value="Private"
-              onChange={handleChange}
-              value={userData.privacy}
-            />
-            <label className="form-check-label" htmlFor="private">private</label>
+            <label className="form-check-label" htmlFor="privacy">Make bucketlist public?</label>
           </div>
         </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>Create Bucket List</button>
+        <div className="form-group">
+          <button className="btn btn-primary" type="submit">
+            Create Bucket List
+          </button>
         </div>
       </form>
-    </div>
+
+      <button onClick={getBucketList}>Test</button>
+    </div >
   );
 };
 

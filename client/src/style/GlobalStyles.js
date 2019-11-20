@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components/macro';
+import { createGlobalStyle } from "styled-components/macro";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Exo:500&display=swap');
     html {
         font-size: 100%;
@@ -32,12 +32,11 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     p {
-        font-family: 'Lato', serif;
         padding: 0;
         margin: 0;
     }
     a {
-        color: inherit;
+        color: #027fa7;
         text-decoration: none;
     }
     img {
@@ -74,7 +73,9 @@ const GlobalStyles = createGlobalStyle`
 /* Global Styles */
     .container {
         max-width: 682px;
-        margin: 0 auto;
+        margin: 2rem auto 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
 /* Header */
@@ -95,8 +96,8 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .nav-link {
-        padding-right: .5rem;
-        padding-left: .5rem;
+        padding-right: .75rem;
+        padding-left: .75rem;
         color: #ddf8ff;
     }
 
@@ -196,6 +197,14 @@ const GlobalStyles = createGlobalStyle`
         background-color: #00a3d8;
         border-color: #009bcd;
     }
+    .btn-secondary {
+        color: #027FA7;
+        border: 3px solid #027FA7;
+    }
+    .btn-secondary:hover {
+        color: #fff;
+        background-color: #00a3d8;
+        border-color: #009bcd;
 `;
 
 export default GlobalStyles;

@@ -1,68 +1,72 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { axiosLogin as axios } from '../utils/axiosLogin'
 
 const SignIn = props => {
-  const [userData, setUserData] = useState({
-    email: "",
-    password: ""
+  const [userCredentials, setUserCredentials] = useState({
+    username: '',
+    password: ''
   });
 
-  function handleChange(event) {
-    const eventName = event.target.name;
-    const eventValue = event.target.value;
+  const history = useHistory();
 
-    return setUserData({
-      ...userData,
-      [event.target.name]: event.target.value
+  const handleChange = event => {
+    setUserCredentials({
+      ...userCredentials,
+      [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = event => {
+    // post request to retrieve a token from the backend
     event.preventDefault();
+    const endpoint = '/login';
 
-    axios
-      .post("", userData)
-      .then(res => {})
-      .catch(error => console.log(`error: ${error}`));
-  }
+    axios().post(endpoint, `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`)
+      .then(response => {
+        console.log("login response", response.data);
+        const token = response.data.access_token;
+        sessionStorage.setItem('token', token);
+        // once token is handeled, navigate to XXX page
+        history.push('/bucketlists')
+      })
+      .catch(error => console.log('login error', error.response));
+
+  };
 
   return (
-    <div className="sign-in">
+    <div className='sign-in'>
       <div>
         <h2>Sign in</h2>
-        <p>
-          or{" "}
-          <span>
-            <a href="#">create a account</a>
-          </span>
+        <p>or&nbsp;
+          <a href='/register'>create an account</a>
         </p>
       </div>
       <form onSubmit={handleSubmit}>
-    
+
         <div className='form-group'>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor='username'>Username</label>
           <input
             className='form-control'
-            type="text"
-            name="email"
-            id="email"
+            type='text'
+            name='username'
             onChange={handleChange}
-            value={userData.email}
+            value={userCredentials.username}
           />
         </div>
         <div className='form-group'>
           <label htmlFor="password">Password</label>
           <input
             className='form-control'
-            type="password"
-            name="password"
-            id="password"
+            type='password'
+            name='password'
             onChange={handleChange}
-            value={userData.password}
+            value={userCredentials.password}
           />
         </div>
-        <button className='btn btn-primary'>Sign In</button>
-    
+        <div className='form-group'>
+          <button className='btn btn-primary' type='submit'>Sign In</button>
+        </div>
       </form>
     </div>
   );
