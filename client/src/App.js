@@ -9,10 +9,10 @@ import CreateBucketList from './components/CreateBucketList';
 import EditBucketList from './components/EditBucketList';
 import ShareBucketList from './components/ShareBucketList';
 import AddEntry from './components/AddEntry';
+import BucketList from "./components/BucketList";
 
 import { GlobalStyles } from './style/GlobalStyles';
 import { PrivateRoute } from './utils/PrivateRoute';
-
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
         <div className='container'>
           <Route path='/Login' render={props => <UserLogin {...props} />} />
           <Route path='/Register' render={props => <UserRegistration {...props} />} />
+          <PrivateRoute path='/bucketlists/' component={BucketList} />
           <PrivateRoute path='/bucketlist/create' component={CreateBucketList} />
           <PrivateRoute path='/bucketlist/create/:id' component={CreateBucketListItem} />
           <PrivateRoute path='/bucketlist/edit' component={EditBucketList} />
