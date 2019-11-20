@@ -6,7 +6,7 @@ export default function BucketListEdit() {
   const empty = "";
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => console.log(data);
-  console.log(errors);
+  // console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Edit Bucket List</h2>

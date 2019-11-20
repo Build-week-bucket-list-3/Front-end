@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 const CreateAccount = (props) => {
 
     const [sendData, setSendData] = useState({});
-    const {register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = async data => {
-        if(data.password === data.confirmPassword){
+        if (data.password === data.confirmPassword) {
 
             setSendData({
                 'username': data.username,
@@ -21,31 +21,30 @@ const CreateAccount = (props) => {
         }
 
     };
-    
 
-    
-        useEffect(()=>{
-            axios.post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", sendData ).then(response => {
+    useEffect(() => {
+        axiosWithAuth()
+            .post("/auth/register", sendData)
+            .then(response => {
                 console.log(response);
-            }).catch(error => console.log(error));
-        },[sendData]);
-    
+            })
+            .catch(error => console.log(error));
+    }, [sendData]);
 
     return (
-
         <div className='create-account-container'>
             <h2>Create your account</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
                     <input className='form-control' type='text' name='username' id='username' ref={register({ required: true })} />
-                    {errors.username && 'Field is required!'}
+                    {errors.username && 'A username is required.'}
                 </div>
                 <div className='form-group'>
                     <label htmlFor='email'>Email Address</label>
-                    <input className='form-control' type='text' name='email' id='email' ref={register({
+                    <input className='form-control' type='email' name='email' id='email' ref={register({
                         required: true, pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "field Required"
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "An email address is required."
                         }
                     })} />
                     {errors.email && errors.email.message}

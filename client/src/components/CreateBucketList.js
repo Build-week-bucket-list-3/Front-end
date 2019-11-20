@@ -39,7 +39,7 @@ const CreateBucketList = props => {
             onChange={handleChange}
             value={userData.username}
           />
-          {console.log(userData)}
+          {console.log('user data', userData)}
         </div>
         <div className="form-group">
           <label htmlFor="email">Email Address</label>
