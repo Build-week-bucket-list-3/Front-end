@@ -70,7 +70,7 @@ export default function BucketList() {
                 {bucketData.map(item =>{
                     return (
                     <Card key={item.bucketListId}>
-                        <Link to='#'>
+                        <Link to='/bucketlist/view'>
                             <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                             <div className="card-text">
                                 <h3>{item.bucketlistName}</h3>
