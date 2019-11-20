@@ -6,7 +6,7 @@ import UserLogin from './components/SignIn';
 import UserRegistration from "./components/CreateAccount";
 import CreateBucketListItem from './components/CreateBucketListItem';
 import CreateBucketList from './components/CreateBucketList';
-import EditBucketList from './components/EditBucketList';
+import EditBucketList from './components/EditJournalEntry';
 import ShareBucketList from './components/ShareBucketList';
 import AddEntry from './components/AddEntry';
 import BucketList from "./components/BucketList";

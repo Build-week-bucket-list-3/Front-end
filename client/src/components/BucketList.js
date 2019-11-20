@@ -50,7 +50,7 @@ export default function BucketList() {
     return (
         <>
             <h2>My Bucket List</h2>
-            <Link to="#">Create a Bucket List</Link>
+            <Link to="#" className="btn btn-secondary">Create a Bucket List</Link>
             <ListContainer>
 
                 <Card>

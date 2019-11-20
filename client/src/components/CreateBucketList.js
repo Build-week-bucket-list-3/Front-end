@@ -65,7 +65,7 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.shareable}
             />
-            <label className="form-check-label" htmlFor="privacy">Make bucketlist public?</label>
+            <label className="form-check-label" htmlFor="privacy">Make public</label>
           </div>
         </div>
         <div className="form-group">
