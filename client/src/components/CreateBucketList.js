@@ -68,8 +68,10 @@ const CreateBucketList = props => {
             <label className="form-check-label" htmlFor="privacy">Make bucketlist public?</label>
           </div>
         </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>Create Bucket List</button>
+        <div className="form-group">
+          <button className="btn btn-primary" type="submit">
+            Create Bucket List
+          </button>
         </div>
       </form>
 
