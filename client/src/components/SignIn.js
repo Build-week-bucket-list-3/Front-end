@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
-// import { axiosLogin as axios } from '../utils/axiosLogin'
+import { axiosLogin as axios } from '../utils/axiosLogin'
 
 const SignIn = props => {
   const [userCredentials, setUserCredentials] = useState({
@@ -19,58 +17,21 @@ const SignIn = props => {
     });
   };
 
-  // const login = e => {
-  //   // post request to retrieve a token from the backend
-  //   e.preventDefault();
-  //   axios
-  //     .post("HOSTED BACKEND REPOSITORY/login",
-  //       `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`, {
-  //       headers: {
-  //         Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       }
-  //     }
-  //     )
-  //     .then(response => {
-  //       console.log("response", response.data);
-  //       sessionStorage.setItem("token", response.data.access_token);
-  //       // setLogged(true);
-  //       // once token is handeled, navigate to XXX page
-  //       props.history.push("/URL OF XXX PAGE");
-  //     })
-  //     .catch(err => {
-  //       console.log("there was an error");
-  //       console.log(err);
-  //     })
-  // };
-
   const handleSubmit = event => {
     // post request to retrieve a token from the backend
     event.preventDefault();
-    // const endpoint = '/login';
-    const queryStrings = {
-      grant_type: 'password',
-      username: userCredentials.username,
-      password: userCredentials.password
-    }
+    const endpoint = '/login';
 
-    console.log('query strings:', queryStrings);
-
-    axios
-      .post('https://gcgsauce-bucketlist.herokuapp.com/login', { params: queryStrings }, {
-        headers: {
-          Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
+    axios().post(endpoint, `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`)
       .then(response => {
-        console.log("response", response.data);
+        console.log("login response", response.data);
         const token = response.data.token;
         sessionStorage.setItem('token', token);
         // once token is handeled, navigate to XXX page
         history.push('users/bucketlists/all')
       })
-      .catch(error => console.log('login error', error))
+      .catch(error => console.log('login error', error.response));
+
   };
 
   return (
