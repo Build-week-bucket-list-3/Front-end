@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 
-export default function BucketListEdit() {
+export default function EditEntryJournal() {
   const [ShowText, setShowText] = useState(true);
   const empty = "";
   const { register, handleSubmit, errors } = useForm();
@@ -10,15 +10,17 @@ export default function BucketListEdit() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Edit Bucket List</h2>
-      <div className='form-group'>
-        <select className='form-control' name="ChooseBucketList" ref={register}>
-          <option value="DummyData1">DummyData1</option>
-          <option value="DummyData2">DummyData2</option>
-          <option value="DummyData3">DummyData3</option>
-        </select>
+      <div className="form-group">
+        <input
+          type="text"
+          placeholder="EditBucketListName"
+          name="EditBucketListName"
+          ref={register}
+          placeholder=" Selected Bucket List Name"
+        />
       </div>
-      <div className='form-group'>
-        <div className='form-check'>
+      <div className="form-group">
+        <div className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
@@ -26,10 +28,12 @@ export default function BucketListEdit() {
             name="GoalCompleted"
             ref={register}
           />
-          <label className="form-check-label" htmlFor="goalcompleted">Goal Completed</label>
+          <label className="form-check-label" htmlFor="goalcompleted">
+            Goal Completed
+          </label>
         </div>
       </div>
-      <div className='form-group'>
+      <div className="form-group">
         <h3>Date:</h3>
         {ShowText && (
           <textarea
@@ -39,9 +43,14 @@ export default function BucketListEdit() {
             ref={register}
           ></textarea>
         )}
-        <button className='btn btn-secondary' onClick={() => setShowText(!ShowText)}>X</button>
+        <button
+          className="btn btn-secondary"
+          onClick={() => setShowText(!ShowText)}
+        >
+          X
+        </button>
 
-        <input className='btn btn-primary' type="submit" value="save" />
+        <input className="btn btn-primary" type="submit" value="save" />
       </div>
     </form>
   );
