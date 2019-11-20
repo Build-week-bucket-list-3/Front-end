@@ -21,7 +21,7 @@ const CreateBucketList = props => {
 
     axios
       .post("", userData)
-      .then(resp => { })
+      .then(resp => {})
       .catch(error => console.log(`error: ${error}`));
   }
 
@@ -63,7 +63,9 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.privacy}
             />
-            <label className="form-check-label" htmlFor="privacy">Public</label>
+            <label className="form-check-label" htmlFor="privacy">
+              Public
+            </label>
           </div>
           <div className="form-check">
             <input
@@ -74,11 +76,15 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.privacy}
             />
-            <label className="form-check-label" htmlFor="private">Private</label>
+            <label className="form-check-label" htmlFor="private">
+              Private
+            </label>
           </div>
         </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>Create Bucket List</button>
+        <div className="form-group">
+          <button className="btn btn-primary" type="submit">
+            Create Bucket List
+          </button>
         </div>
       </form>
     </div>
