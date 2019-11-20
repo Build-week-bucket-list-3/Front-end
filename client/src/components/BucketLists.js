@@ -22,15 +22,15 @@ const ListContainer = Styled.div`
 `;
 const Card = Styled.div`
     width: 45%;
-    background-color:#E5E5E5;
+    background-color:#FAFAFA;
     color:#333;
     margin:1.8rem 0;
     box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
-    a{
+    a {
         color:inherit;
     }
     .card-text{
-        h3{
+        h3 {
             font-weight:500;
         }
         padding:1.5rem 1rem;
@@ -49,19 +49,10 @@ export default function BucketList() {
 
     }, []);
 
-    function getBucketList(event) {
-        event.preventDefault();
-
-        axiosWithAuth()
-            .get("/users/all")
-            .then(res => console.log(res))
-            .catch(err => console.log(err.message));
-    }
-
     return (
         <>
             <Blheader>
-                <h2>My Bucket List</h2>
+                <h2>My Bucket Lists</h2>
                 <Link to="/bucketlist/create" className=" btn btn-secondary">Create a Bucket List</Link>
             </Blheader>
             {console.log(bucketData)}
@@ -74,8 +65,6 @@ export default function BucketList() {
                                 <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                                 <div className="card-text">
                                     <h3>{item.bucketlistName}</h3>
-
-
                                 </div>
                             </Link>
                         </Card>);
@@ -90,10 +79,6 @@ export default function BucketList() {
                     </Link>
                 </Card> */}
 
-
-
-
-                {/* <button onClick={getBucketList}>Test</button> */}
             </ListContainer>
         </>
 
