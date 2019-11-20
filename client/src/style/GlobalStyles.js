@@ -1,3 +1,4 @@
+import Styled from "styled-components";
 import { createGlobalStyle } from "styled-components/macro";
 
 export const GlobalStyles = createGlobalStyle`
@@ -208,4 +209,39 @@ export const GlobalStyles = createGlobalStyle`
         border-color: #009bcd;
 `;
 
-export default GlobalStyles;
+
+export const Blheader = Styled.div`
+
+    text-align:center;
+    h2{
+        margin-bottom: 1rem;
+    }
+`;
+
+export const ListContainer = Styled.div`
+    display:flex;
+    justify-content:space-around;
+    align-content:center;
+    flex-wrap:wrap;
+    margin: 0 auto;
+
+
+`;
+
+export const Card = Styled.div`
+    width: 45%;
+    background-color:#FAFAFA;
+    color:#333;
+    margin:1.8rem 0;
+    box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
+    a {
+        color:inherit;
+    }
+    .card-text{
+        h3 {
+            font-weight:500;
+        }
+        padding:1.5rem 1rem;
+        text-align:left;
+    }
+`;
