@@ -32,7 +32,6 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     p {
-        font-family: 'Lato', serif;
         padding: 0;
         margin: 0;
     }

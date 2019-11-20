@@ -9,7 +9,8 @@ export default function BucketListEdit() {
   // console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Edit Bucket List</h2>
+      {/* <h2>Edit Bucket List</h2> */}
+      <h2>Edit</h2>
       <div className='form-group'>
         <select className='form-control' name="ChooseBucketList" ref={register}>
           <option value="DummyData1">DummyData1</option>

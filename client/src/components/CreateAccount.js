@@ -23,7 +23,7 @@ const CreateAccount = (props) => {
 
     useEffect(() => {
         axios
-            .post("https://gcgsauce-bucketlist.herokuapp.com/createnew", userCredentials)
+            .post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", userCredentials)
             .then(response => {
                 console.log("create account response", response.data);
             })
