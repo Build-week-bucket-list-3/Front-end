@@ -3,6 +3,14 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+const Blheader = Styled.div`
+
+    text-align:center;
+    h2{
+        margin-bottom: 1rem;
+    }
+`;
+
 const ListContainer = Styled.div`
     display:flex;
     justify-content:space-around;
@@ -18,6 +26,9 @@ const Card = Styled.div`
     color:#333;
     margin:1.8rem 0;
     box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
+    a{
+        color:inherit;
+    }
     .card-text{
         h3{
             font-weight:500;
@@ -33,7 +44,7 @@ export default function BucketList() {
     useEffect(() => {
         axiosWithAuth()
             .get("/users/all")
-            .then(res => console.log(res))
+            .then(res => setBucketData(res.data))
             .catch(err => console.log(err.message));
 
     }, []);
@@ -49,11 +60,27 @@ export default function BucketList() {
 
     return (
         <>
-            <h2>My Bucket List</h2>
-            <Link to="#" className="btn btn-secondary">Create a Bucket List</Link>
+            <Blheader>
+                <h2>My Bucket List</h2>
+                <Link to="/bucketlist/create" className=" btn btn-secondary">Create a Bucket List</Link>
+            </Blheader>
+            {console.log(bucketData)}
             <ListContainer>
 
-                <Card>
+                {bucketData.map(item => {
+                    return (
+                        <Card key={item.bucketListId}>
+                            <Link to='#'>
+                                <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
+                                <div className="card-text">
+                                    <h3>{item.bucketlistName}</h3>
+
+
+                                </div>
+                            </Link>
+                        </Card>);
+                })}
+                {/* <Card>
                     <Link to='#'>
                         <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                         <div className="card-text">
@@ -61,20 +88,12 @@ export default function BucketList() {
                             <p>privacy</p>
                         </div>
                     </Link>
-                </Card>
+                </Card> */}
 
 
-                <Card>
-                    <Link to='#'>
-                        <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
-                        <div className="card-text">
-                            <h3>List Name</h3>
-                            <p>privacy</p>
-                        </div>
-                    </Link>
-                </Card>
 
-                <button onClick={getBucketList}>Test</button>
+
+                {/* <button onClick={getBucketList}>Test</button> */}
             </ListContainer>
         </>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
 
 export default function CreateBucketListItem() {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = async data => { console.log(data) };
 
 
