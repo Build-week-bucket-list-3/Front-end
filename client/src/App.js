@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/Header';
 import UserLogin from './components/SignIn';
@@ -19,6 +19,7 @@ import { axiosWithAuth } from './utils/axiosWithAuth';
 
 function App() {
   const [bucketLists, setBucketLists] = useState([]);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   const refreshBucketLists = () => {
     axiosWithAuth()
@@ -29,8 +30,21 @@ function App() {
       .catch(err => console.log('error fetching bucket lists', err.message));
   }
 
+  const getCurrentUser = username => {
+    axiosWithAuth()
+      .get('/users')
+      .then(res => {
+        const user = res.data.user.find(account => account.username === username)
+        console.log(res);
+        localStorage.setItem('user', JSON.stringify(user))
+        setUser(user);
+      })
+      .catch(err => console.log('error on fetch user info:', err.message))
+
+  }
+
   return (
-    <BucketListsContext.Provider value={{ bucketLists, refreshBucketLists }}>
+    <BucketListsContext.Provider value={{ bucketLists, refreshBucketLists, getCurrentUser, user }}>
       <Router>
         <div className='App'>
           <GlobalStyles />
@@ -39,12 +53,14 @@ function App() {
             <Route path='/Login' render={props => <UserLogin {...props} />} />
             <Route path='/Register' render={props => <UserRegistration {...props} />} />
             <PrivateRoute path='/bucketlists' component={BucketLists} />
-            <PrivateRoute path='/bucketlist/:id' component={ViewBucketListItems} />
-            <PrivateRoute exact path='/bucketlist/create' component={CreateBucketList} />
-            <PrivateRoute path='/bucketlist/create/:id' component={CreateBucketListItem} />
-            <PrivateRoute path='/bucketlist/add' component={AddJournalEntry} />
-            <PrivateRoute path='/bucketlist/edit/:id' component={EditJournalEntry} />
-            <PrivateRoute path='/bucketlist/share' component={ShareBucketList} />
+            <Switch>
+              <PrivateRoute path='/bucketlist/add' component={AddJournalEntry} />
+              <PrivateRoute path='/bucketlist/edit/:id/:itemId' component={EditJournalEntry} />
+              <PrivateRoute path='/bucketlist/share' component={ShareBucketList} />
+              <PrivateRoute path='/bucketlist/create/:id' component={CreateBucketListItem} />
+              <PrivateRoute path='/bucketlist/new' component={CreateBucketList} />
+              <PrivateRoute path='/bucketlist/:id' component={ViewBucketListItems} />
+            </Switch>
           </div>
         </div>
       </Router >

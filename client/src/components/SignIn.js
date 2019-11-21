@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { BucketListsContext } from '../context/BucketListsContext';
 
 const SignIn = props => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,6 +10,7 @@ const SignIn = props => {
   });
 
   const history = useHistory();
+  const { getCurrentUser } = useContext(BucketListsContext);
 
   const handleChange = event => {
     setUserCredentials({
@@ -26,6 +28,7 @@ const SignIn = props => {
       .post(endpoint, userCredentials)
       .then(response => {
         localStorage.setItem('token', response.data.token);
+        getCurrentUser(userCredentials.username);
         // once token is handeled, navigate to XXX page
         history.push('/bucketlists')
       })

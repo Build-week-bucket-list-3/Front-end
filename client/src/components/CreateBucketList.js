@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import { BucketListsContext } from '../context/BucketListsContext';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const CreateBucketList = props => {
@@ -6,6 +8,9 @@ const CreateBucketList = props => {
     name: "",
     shareable: false
   });
+
+  const { user } = useContext(BucketListsContext);
+  const history = useHistory();
 
   function handleChange(event) {
     const value = event.target.name === 'shareable' ? !userData.shareable : event.target.value;
@@ -22,13 +27,13 @@ const CreateBucketList = props => {
     event.preventDefault();
 
     const payload = {
-      "title": userData.name,
-      "shareable": JSON.stringify(userData.shareable)
+      title: userData.name,
+      user_id: user.id
     }
 
     axiosWithAuth()
       .post("/buckets", payload)
-      .then(resp => console.log(resp))
+      .then(() => history.push('/bucketlists'))
       .catch(error => console.log(`error: ${error}`));
   }
 
