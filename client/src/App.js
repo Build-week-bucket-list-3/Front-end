@@ -1,21 +1,22 @@
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import NavBar from './components/Header';
-import UserLogin from './components/SignIn';
+import NavBar from "./components/Header";
+import UserLogin from "./components/SignIn";
 import UserRegistration from "./components/CreateAccount";
-import BucketLists from "./components/BucketLists";
-import CreateBucketList from './components/CreateBucketList';
-import CreateBucketListItem from './components/CreateBucketListItem';
+
+import CreateBucketListItem from "./components/CreateBucketListItem";
+import CreateBucketList from "./components/CreateBucketList";
+import EditEntryJournal from "./components/EditEntryJournal";
+import ShareBucketList from "./components/ShareBucketList";
+import AddEntry from "./components/AddEntry";
+import BucketList from "./components/BucketList";
 import ViewBucketListItems from "./components/ViewBucketListItems";
 import AddJournalEntry from './components/AddJournalEntry';
 import EditJournalEntry from './components/EditJournalEntry';
 import ShareBucketList from './components/ShareBucketList';
 
-import { GlobalStyles } from './style/GlobalStyles';
-import { PrivateRoute } from './utils/PrivateRoute';
-import { BucketListsContext } from './context/BucketListsContext'
-import { axiosWithAuth } from './utils/axiosWithAuth';
 
 function App() {
   const [bucketLists, setBucketLists] = useState([]);
@@ -44,6 +45,7 @@ function App() {
   }
 
   return (
+
     <BucketListsContext.Provider value={{ bucketLists, refreshBucketLists, getCurrentUser, user }}>
       <Router>
         <div className='App'>
@@ -61,7 +63,7 @@ function App() {
               <PrivateRoute path='/bucketlist/new' component={CreateBucketList} />
               <PrivateRoute path='/bucketlist/:id' component={ViewBucketListItems} />
             </Switch>
-          </div>
+
         </div>
       </Router >
     </BucketListsContext.Provider>

@@ -199,7 +199,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     .btn-secondary {
         color: #027FA7;
-        border: 1px solid #027FA7;
+
+        border: 3px solid #027FA7;
+        display: inline-block;
     }
     .btn-secondary:hover {
         color: #fff;
