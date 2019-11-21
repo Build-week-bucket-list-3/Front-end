@@ -242,11 +242,14 @@ export const Card = Styled.div`
     color:#333;
     margin:1.8rem 0;
     box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
+    .card-img-top{
+        padding:0;
+    }
     
     a {
         color:inherit;
     }
     p,h3,img{
-       padding:1.5rem 1rem;  
+       padding: .5rem 1rem;  
     }
 `;
