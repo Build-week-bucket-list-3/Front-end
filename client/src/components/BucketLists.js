@@ -23,7 +23,7 @@ export default function BucketList() {
                     return (
                         <Card key={item.id}>
                             <Link to={{ pathname: `bucketlist/${item.id}`, state: { status: `${item.title}` } }}>
-                                <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
+                                <img className="card-img-top"src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                                 <div className="card-text">
                                     <h3>{item.title}</h3>
                                 </div>

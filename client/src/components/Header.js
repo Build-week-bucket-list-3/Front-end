@@ -10,7 +10,7 @@ const Header = () => {
                 <Link className='nav-link' to='/bucketlist/new'>Create a Bucket List</Link>
             </nav>
 
-            <Link to='/' className='nav-link'>Login</Link>
+            <Link to='/' className='nav-link'><img src='/images/icon-profile.svg' width='15px' />&nbsp;Login</Link>
         </header>
     )
 }
