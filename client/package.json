@@ -35,6 +35,7 @@
     ]
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "babel-plugin-macros": "^2.6.2",
     "babel-plugin-styled-components": "^1.10.6"
   }

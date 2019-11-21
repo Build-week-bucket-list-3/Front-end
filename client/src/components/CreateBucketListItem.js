@@ -1,10 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import useForm from 'react-hook-form';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { BucketListsContext } from '../context/BucketListsContext';
 
 export default function CreateBucketListItem() {
     const { register, handleSubmit, errors } = useForm();
-    const onSubmit = async data => { console.log(data) };
+    const params = useParams();
+    const history = useHistory();
+    const { refreshBucketLists } = useContext(BucketListsContext);
 
+    const onSubmit = async data => {
+        console.log(data)
+        const payload = {
+            bucket_id: params.id,
+            item_name: data.name,
+            journal_entry: data.journal,
+            photo: data.media.trim()
+        }
+
+        axiosWithAuth()
+            .post('/items', payload)
+            .then(() => {
+                refreshBucketLists();
+                history.push(`/bucketlist/${params.id}`);
+            })
+    };
 
     return (
         <div>
@@ -20,28 +41,6 @@ export default function CreateBucketListItem() {
                     {errors.name && 'Field is Required'}
                 </div>
                 <div className='form-group'>
-                    <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type='radio'
-                            name='public'
-                            value='public'
-                            ref={register({ required: true, })} />
-                        {errors.privacy && 'Field is Required'}
-                        <label className='form-check-label' htmlFor='public'>Public</label>
-                    </div>
-                    <div className='form-check'>
-                        <input
-                            className="form-check-input"
-                            type='radio'
-                            name='privacy'
-                            value='private'
-                            ref={register({ required: true, })} />
-                        {errors.privacy && 'Field is Required'}
-                        <label className='form-check-label' htmlFor='private'>Private</label>
-                    </div>
-                </div>
-                <div className='form-group'>
                     <label htmlFor='journal'>Journal Entry</label>
                     <textarea
                         className='form-control'
@@ -49,10 +48,12 @@ export default function CreateBucketListItem() {
                         ref={register}></textarea>
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='media'>Add a photo</label>
+                    <label htmlFor='media'>Add photo</label>
                     <input
-                        type='file'
+                        className='form-control'
+                        type='text'
                         name='media'
+                        placeholder='http://'
                         ref={register} />
                 </div>
                 <div className='form-group'>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 const CreateAccount = (props) => {
@@ -20,10 +20,10 @@ const CreateAccount = (props) => {
         }
 
     };
-  
+
     useEffect(() => {
-        axios
-            .post("https://gcgsauce-bucketlist.herokuapp.com/createnewuser", userCredentials)
+        axiosWithAuth()
+            .post("/users/register", userCredentials)
             .then(response => {
                 console.log("create account response", response.data);
             })

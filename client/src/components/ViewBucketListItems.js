@@ -1,46 +1,11 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams, useHistory } from 'react-router-dom';
+
+
+
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { Link } from "react-router-dom";
+import { BucketListsContext } from '../context/BucketListsContext';
 
-const ViewBucketListItems = () => {
-  const [ShowText, setShowText] = useState(true);
-  const Blheader = styled.div`
-    text-align: center;
-    h2 {
-      margin-bottom: 1rem;
-    }
-  `;
-
-  const ListContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-  `;
-  const Card = styled.div`
-    width: 45%;
-    background-color: #e5e5e5;
-    color: #333;
-    margin: 1.8rem 0;
-    box-shadow: 0 0.2rem 0.5rem rgba(000, 000, 000, 0.2);
-    a {
-      color: inherit;
-    }
-    .card-text {
-      h3 {
-        font-weight: 500;
-      }
-      padding: 1.5rem 1rem;
-      text-align: left;
-    }
-  `;
-  const Img = styled.div`
-    width: 90%;
-    height: 50%;
-    margin: 0 auto;
-  `;
   const Row = styled.div`
     display: flex;
     width: 100%;
@@ -51,79 +16,133 @@ const ViewBucketListItems = () => {
     flex-wrap: wrap;
   `;
 
-  const [BucketListItemData, setBucketListItemData] = useState([]);
-  useEffect(() => {
-    axiosWithAuth()
-      .get("bucketlists/{bucketlistid}/items/")
-      .then(res => setBucketListItemData(res.data))
-      .catch(err => console.log(err.message));
+  const [ShowText, setShowText] = useState(true);
 
-    axiosWithAuth()
-      .get("bucketlists/{bucketlistid}/items/")
-      .then(res => console.log(res))
-      .catch(err =>
-        console.log("there is a error from the axios with auth,", err)
-      );
-  }, []);
   return (
     <>
       <Blheader>
         <h2>Bucket List Items</h2>
         <Link to="/bucketlist/create/:id" className=" btn btn-secondary">
           Create a Bucket List Item
-        </Link>
-      </Blheader>
+        </button>
+        {ShowText && (
+          <button
+            className="delete btn btn-secondary"
+            onClick={() => setShowText(!ShowText)}
+          >
+            Delete
+          </button>
+        )}
+        {ShowText && (
+          <button className="details btn btn-secondary">Details</button>
+        )}
+        {ShowText && <button className="edit btn btn-secondary">Edit</button>}
+      </span>
+
+      <div>
+        {ShowText && (
+          <Row>
+            <Card className="card">
+              <Img>
+                <img src="images/australia.jpg" />
+              </Img>
+              <h4>Visit Australia</h4>
+              <p>Private</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+
+            <Card className="card">
+              <Img>
+                <img src="images/england.jpg" />
+              </Img>
+              <h4>Visit England</h4>
+              <p>Private</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+
+            <Card className="card">
+              <Img>
+                <img src="images/greece.jpg" />
+              </Img>
+              <h4>Visit Greece</h4>
+              <p>Private</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+            <Card className="card">
+              <Img>
+                <img src="images/paris.jpg" />
+              </Img>
+              <h4>Visit Paris</h4>
+              <p>Public</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+
+            <Card className="card">
+              <Img>
+                <img src="images/ireland.jpg" />
+              </Img>
+              <h4>Visit Ireland</h4>
+              <p>Private</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+
+            <Card className="card">
+              <Img>
+                <img src="images/mexico.jpg" />
+              </Img>
+              <h4>Visit Mexico</h4>
+              <p>Private</p>
+              <button className="detailsBItem btn btn-primary">Details</button>
+            </Card>
+          </Row>
+        )}
+      </div>
+    </div>
+const ViewBucketListItems = (props) => {
+  const [ShowText, setShowText] = useState(true);
+  const [items, setItems] = useState([]);
+  const { bucketLists } = useContext(BucketListsContext);
+  const params = useParams();
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/items')
+      .then(res => {
+        setItems(res.data.filter(item => `${item.bucket_id}` === params.id));
+      })
+      .catch(err => console.log(err.message));
+
+  }, []);
+
+  console.log(items);
+
+  return (
+    <div>
+      <div className=''>
+        <h2>Traveling</h2>
+        <button className="share btn btn-primary">
+          share
+        </button>
+      </div>
+      <Link className="createBItem btn btn-secondary btn-block" to={`/bucketlist/create/${params.id}`}>Create a Bucket List Item</Link>
       <ListContainer>
-        {ShowText &&
-          BucketListItemData.map(item => {
-            console.log("item:", item);
-            return (
-              <Row>
-                <Card key={item.bucketListId}>
-                  <Link to={`/bucketlist/${item.bucketListId}`}>
-                    <Img>
-                      <img src="../images/mountains.jpg" alt="card img" />
-                    </Img>
-                    <div className="card-text">
-                      <h3>{item.bucketlistName}</h3>
-                    </div>
-                  </Link>
-                </Card>
-              </Row>
-            );
-          })}
-        <div>
-          <span>
-            {ShowText && <h2>Traveling</h2>}
-            {ShowText && (
-              <button className="share btn btn-primary" href="#">
-                share
-              </button>
-            )}
-          </span>
-          <span>
-            <button className="createBItem btn btn-secondary">
-              Create a Bucket List Item
-            </button>
-            {ShowText && (
-              <button
-                className="delete btn btn-secondary"
-                onClick={() => setShowText(!ShowText)}
-              >
-                Delete
-              </button>
-            )}
-            {ShowText && (
-              <button className="details btn btn-secondary">Details</button>
-            )}
-            {ShowText && (
-              <button className="edit btn btn-secondary">Edit</button>
-            )}
-          </span>
-        </div>
+        {
+          items.map(item => (
+            <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
+              <Card>
+                {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                <p>{item.item_name}</p>
+                <p>{item.journal_entry}</p>
+              </Card>
+            </Link>
+          ))
+        }
       </ListContainer>
-    </>
+      <div>
+
+      </div>
+    </div >
   );
 };
-
 export default ViewBucketListItems;
+
