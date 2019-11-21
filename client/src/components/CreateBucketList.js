@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import { BucketListsContext } from '../context/BucketListsContext';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const CreateBucketList = props => {
@@ -6,6 +8,9 @@ const CreateBucketList = props => {
     name: "",
     shareable: false
   });
+
+  const { user } = useContext(BucketListsContext);
+  const history = useHistory();
 
   function handleChange(event) {
     const value = event.target.name === 'shareable' ? !userData.shareable : event.target.value;
@@ -22,23 +27,14 @@ const CreateBucketList = props => {
     event.preventDefault();
 
     const payload = {
-      "bucketlistName": userData.name,
-      "shareable": JSON.stringify(userData.shareable)
+      title: userData.name,
+      user_id: user.id
     }
 
     axiosWithAuth()
-      .post("/users/bucketlist", payload)
-      .then(resp => console.log(resp))
+      .post("/buckets", payload)
+      .then(() => history.push('/bucketlists'))
       .catch(error => console.log(`error: ${error}`));
-  }
-
-  function getBucketList(event) {
-    event.preventDefault();
-
-    axiosWithAuth()
-      .get("/users/all")
-      .then(res => console.log(res))
-      .catch(err => console.log(err.message));
   }
 
   return (
@@ -65,7 +61,7 @@ const CreateBucketList = props => {
               onChange={handleChange}
               value={userData.shareable}
             />
-            <label className="form-check-label" htmlFor="privacy">Do you want to make your bucketlist public?</label>
+            <label className="form-check-label" htmlFor="privacy">Make public</label>
           </div>
         </div>
         <div className="form-group">
@@ -75,7 +71,6 @@ const CreateBucketList = props => {
         </div>
       </form>
 
-      <button onClick={getBucketList}>Test</button>
     </div >
   );
 };

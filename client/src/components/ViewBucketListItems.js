@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from "react";
-import useForm from "react-hook-form";
-import styled from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams, useHistory } from 'react-router-dom';
 
-const ViewBucketListItems = () => {
-  const Card = styled.div`
-    width: 250px;
-    height: 350px;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    box-shadow: 5px 10px 5px lightgrey;
-    &:hover {
-      background: lightgrey;
-      box-shadow: 5px 10px 5px grey;
-    }
-  `;
 
-  const Img = styled.div`
-    width: 90%;
-    height: 50%;
-    margin: 0 auto;
-  `;
+
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { BucketListsContext } from '../context/BucketListsContext';
 
   const Row = styled.div`
     display: flex;
@@ -126,7 +105,51 @@ const ViewBucketListItems = () => {
         )}
       </div>
     </div>
+const ViewBucketListItems = (props) => {
+  const [ShowText, setShowText] = useState(true);
+  const [items, setItems] = useState([]);
+  const { bucketLists } = useContext(BucketListsContext);
+  const params = useParams();
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/items')
+      .then(res => {
+        setItems(res.data.filter(item => `${item.bucket_id}` === params.id));
+      })
+      .catch(err => console.log(err.message));
+
+  }, []);
+
+  console.log(items);
+
+  return (
+    <div>
+      <div className=''>
+        <h2>Traveling</h2>
+        <button className="share btn btn-primary">
+          share
+        </button>
+      </div>
+      <Link className="createBItem btn btn-secondary btn-block" to={`/bucketlist/create/${params.id}`}>Create a Bucket List Item</Link>
+      <ListContainer>
+        {
+          items.map(item => (
+            <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
+              <Card>
+                {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                <p>{item.item_name}</p>
+                <p>{item.journal_entry}</p>
+              </Card>
+            </Link>
+          ))
+        }
+      </ListContainer>
+      <div>
+
+      </div>
+    </div >
   );
 };
-
 export default ViewBucketListItems;
+

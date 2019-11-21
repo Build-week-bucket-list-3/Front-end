@@ -6,9 +6,10 @@ const Header = () => {
         <header className='navbar'>
             <h1 className='navbar-brand'>Bucket List</h1>
             <nav>
-                <Link className='nav-link' to='/bucketlist'>My Bucket Lists</Link>
-                <Link className='nav-link' to='/bucketlist/create'>Create a Bucket List</Link>
+                <Link className='nav-link' to='/bucketlists'>My Bucket Lists</Link>
+                <Link className='nav-link' to='/bucketlist/new'>Create a Bucket List</Link>
             </nav>
+
             <Link to='/login' className='nav-link'>Login</Link>
         </header>
     )

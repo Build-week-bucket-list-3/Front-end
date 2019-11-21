@@ -1,3 +1,4 @@
+import Styled from "styled-components";
 import { createGlobalStyle } from "styled-components/macro";
 
 export const GlobalStyles = createGlobalStyle`
@@ -32,7 +33,6 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     p {
-        font-family: 'Lato', serif;
         padding: 0;
         margin: 0;
     }
@@ -71,6 +71,7 @@ export const GlobalStyles = createGlobalStyle`
     [type='submit'] {
         -webkit-appearance: button;
     }
+
 /* Global Styles */
     .container {
         max-width: 682px;
@@ -89,31 +90,25 @@ export const GlobalStyles = createGlobalStyle`
         padding-left: .5rem;
         padding-right: .5rem;
     }
-
     .navbar-brand {
         font-size: 2rem;
         white-space: nowrap;
         color: #fff;
     }
-
     .nav-link {
         padding-right: .75rem;
         padding-left: .75rem;
         color: #ddf8ff;
     }
-
     .nav-link:hover {
         color: #fff;
     }
-
     .nav-link.active {
         font-weight: 600;
     }
-
     .nav-signout {
         color: #ddf8ff;
     }
-
     .nav-signout::before {
         content: url(test.svg);
         width: 26px;
@@ -159,6 +154,9 @@ export const GlobalStyles = createGlobalStyle`
     .form-check-label {
         margin-bottom: 0;
     }
+    textarea.form-control {
+        min-height: 150px;
+    }
 
 /* Buttons */
     .btn {
@@ -178,6 +176,7 @@ export const GlobalStyles = createGlobalStyle`
         border-bottom-color: transparent;
         border-left-color: transparent;
         padding: .375rem .75rem;
+        margin-bottom: 1rem;
         font-size: 1rem;
         line-height: 1.5;
         border-radius: .25rem;
@@ -200,6 +199,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     .btn-secondary {
         color: #027FA7;
+
         border: 3px solid #027FA7;
         display: inline-block;
     }
@@ -207,6 +207,45 @@ export const GlobalStyles = createGlobalStyle`
         color: #fff;
         background-color: #00a3d8;
         border-color: #009bcd;
+    }
+    .btn-block {
+        width: 100%;
+    }
 `;
 
-export default GlobalStyles;
+
+export const Blheader = Styled.div`
+
+    text-align:center;
+    h2{
+        margin-bottom: 1rem;
+    }
+`;
+
+export const ListContainer = Styled.div`
+    display:flex;
+    justify-content:space-around;
+    align-content:center;
+    flex-wrap:wrap;
+    margin: 0 auto;
+
+
+`;
+
+export const Card = Styled.div`
+    width: 45%;
+    background-color:#FAFAFA;
+    color:#333;
+    margin:1.8rem 0;
+    box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
+    a {
+        color:inherit;
+    }
+    .card-text{
+        h3 {
+            font-weight:500;
+        }
+        padding:1.5rem 1rem;
+        text-align:left;
+    }
+`;
