@@ -27,7 +27,7 @@ const ViewBucketListItems = (props) => {
   return (
     <div>
       <div className=''>
-        <h2>Traveling</h2>
+        <h2>Travelling</h2>
         <button className="share btn btn-primary">
           share
         </button>

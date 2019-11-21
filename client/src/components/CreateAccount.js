@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useForm from 'react-hook-form';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -55,7 +56,7 @@ const CreateAccount = (props) => {
                     <input className='form-control' type='password' name='confirmPassword' id='confirmPassword' ref={register({ required: true, minLength: 4 })} />
                 </div>
                 <div className='form-group'>
-                    <button className='btn btn-primary'>Create Account</button>
+                    <Link className='btn btn-primary' to='/bucketlist/'>Create Account</Link>
                 </div>
             </form>
         </div>
