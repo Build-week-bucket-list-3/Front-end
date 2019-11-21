@@ -231,7 +231,8 @@ export const ListContainer = Styled.div`
     align-content:center;
     flex-wrap:wrap;
     margin: 0 auto;
-
+    
+    
 
 `;
 
@@ -241,14 +242,11 @@ export const Card = Styled.div`
     color:#333;
     margin:1.8rem 0;
     box-shadow:0 .2rem .5rem rgba(000,000,000,0.2);
+    
     a {
         color:inherit;
     }
-    .card-text{
-        h3 {
-            font-weight:500;
-        }
-        padding:1.5rem 1rem;
-        text-align:left;
+    p,h3,img{
+       padding:1.5rem 1rem;  
     }
 `;
