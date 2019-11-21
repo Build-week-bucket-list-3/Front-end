@@ -40,7 +40,7 @@ const ViewBucketListItems = (props) => {
         Share
         </button>
       <button className="btn btn-secondary btn-block" onClick={deleteBucket}>
-        Delete
+        Delete Bucket List
       </button>
       <Link className="createBItem btn btn-secondary btn-block" to={`/bucketlist/create/${params.id}`}>Create a Bucket List Item</Link>
       <ListContainer>
