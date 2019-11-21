@@ -6,7 +6,6 @@ import { BucketListsContext } from '../context/BucketListsContext';
 
 
 export default function BucketList() {
-    // const [bucketData, setBucketData] = useState([]);
     const { bucketLists, refreshBucketLists } = useContext(BucketListsContext);
     useEffect(() => {
         refreshBucketLists();
