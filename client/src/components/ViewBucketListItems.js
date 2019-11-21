@@ -48,11 +48,13 @@ const ViewBucketListItems = (props) => {
           items.map(item => (
             <Card>
               <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
-                {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                {Boolean(item.photo) && <img className="card-img-top" src={item.photo} alt={item.item_name} />}
                 {console.log(item.photo)}
-                <h3>{item.item_name}</h3>
-                <p>{item.journal_entry}</p>
-                {Boolean(item.completed) && <img src="/images/icon-checkmark.svg" alt="Goal completed" />}
+                <div className="card-body">
+                  <h3 className="card-title">{item.item_name}</h3>
+                  <p className="card-text">{item.journal_entry}</p>
+                  {Boolean(item.completed) && <img src="/images/icon-checkmark.svg" alt="Goal completed" />}
+                </div>
               </Link>
             </Card>
           ))
