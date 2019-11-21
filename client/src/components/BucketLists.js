@@ -10,11 +10,11 @@ export default function BucketList() {
     useEffect(() => {
         refreshBucketLists();
     }, []);
-
+//   {`/bucketlist/${item.id}`
     return (
         <>
-            <h2>My Bucket Lists</h2>
-            <Link to="/bucketlist/new" className="btn btn-secondary">Create a Bucket List</Link>
+            <h2 className="text-center ">My Bucket Lists</h2>
+            <Link to="/bucketlist/new" className="btn btn-secondary btn-block">Create a Bucket List</Link>
 
             {console.log(bucketLists)}
             <ListContainer>
@@ -22,7 +22,7 @@ export default function BucketList() {
                 {bucketLists.map(item => {
                     return (
                         <Card key={item.id}>
-                            <Link to={`/bucketlist/${item.id}`}>
+                            <Link to={{ pathname:`bucketlist/${item.id}`, state: { status: `${item.title}`}  }}>
                                 <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                                 <div className="card-text">
                                     <h3>{item.title}</h3>

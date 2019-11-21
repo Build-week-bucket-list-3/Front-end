@@ -17,6 +17,7 @@ import { PrivateRoute } from './utils/PrivateRoute';
 import { BucketListsContext } from './context/BucketListsContext'
 import { axiosWithAuth } from './utils/axiosWithAuth';
 
+
 function App() {
   const [bucketLists, setBucketLists] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -44,6 +45,7 @@ function App() {
   }
 
   return (
+
     <BucketListsContext.Provider value={{ bucketLists, refreshBucketLists, getCurrentUser, user }}>
       <Router>
         <div className='App'>
@@ -63,7 +65,7 @@ function App() {
             </Switch>
           </div>
         </div>
-      </Router >
+      </Router>
     </BucketListsContext.Provider>
   );
 }

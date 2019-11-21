@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom';
-
-import { ListContainer, Card } from '../style/GlobalStyles';
-
+import {ListContainer, Card} from '../style/GlobalStyles';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { BucketListsContext } from '../context/BucketListsContext';
 
-const ViewBucketListItems = (props) => {
+
+  const ViewBucketListItems = (props) => {
   const [ShowText, setShowText] = useState(true);
   const [items, setItems] = useState([]);
   const { bucketLists } = useContext(BucketListsContext);
@@ -22,13 +21,13 @@ const ViewBucketListItems = (props) => {
 
   }, []);
 
-  console.log(items);
+  console.log(props);
 
   return (
     <div>
       <div className=''>
-        <h2>Travelling</h2>
-        <button className="share btn btn-primary">
+        <h2 className='text-center'>{props.history.location.state.status}</h2>
+        <button className="share btn btn-primary btn-block">
           share
         </button>
       </div>
@@ -39,6 +38,7 @@ const ViewBucketListItems = (props) => {
             <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
               <Card>
                 {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                {console.log(item.photo)}
                 <p>{item.item_name}</p>
                 <p>{item.journal_entry}</p>
               </Card>
@@ -52,5 +52,6 @@ const ViewBucketListItems = (props) => {
     </div >
   );
 };
+
 export default ViewBucketListItems;
 
