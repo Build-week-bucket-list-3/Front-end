@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import {axiosWithAuth} from "../utils/axiosWithAuth";
 const ViewBucketListItems = (props) => {
-  
-  const [ShowText, setShowText] = useState(true);
-  const [BlItems, setBlItems] = useState([]);
+const [ShowText, setShowText] = useState(true);
+const [BlItems, setBlItems] = useState([]);
 
 
   useEffect(() => {
