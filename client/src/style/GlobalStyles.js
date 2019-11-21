@@ -248,8 +248,8 @@ export const Card = Styled.div`
     
     a {
         color:inherit;
-    }
-    p,h3,img{
-       padding: .5rem 1rem;  
-    }
+     }
+     p,h3,img{
+        padding: .5rem 1rem;  
+     }
 `;
