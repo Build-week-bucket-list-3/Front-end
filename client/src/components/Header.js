@@ -10,7 +10,7 @@ const Header = () => {
                 <Link className='nav-link' to='/bucketlist/new'>Create a Bucket List</Link>
             </nav>
 
-            <Link to='/login' className='nav-link'>Login</Link>
+            <Link to='/' className='nav-link'>Login</Link>
         </header>
     )
 }
