@@ -25,11 +25,11 @@ function App() {
           <Route path='/Login' render={props => <UserLogin {...props} />} />
           <Route path='/Register' render={props => <UserRegistration {...props} />} />
           <PrivateRoute path='/bucketlists/' component={BucketLists} />
+          <PrivateRoute path='/bucketlist/:id' component={ViewBucketListItems} />
           <PrivateRoute path='/bucketlist/create' component={CreateBucketList} />
           <PrivateRoute path='/bucketlist/create/:id' component={CreateBucketListItem} />
-          <PrivateRoute path='/bucketlist/view' component={ViewBucketListItems} />
           <PrivateRoute path='/bucketlist/add' component={AddJournalEntry} />
-          <PrivateRoute path='/bucketlist/edit' component={EditJournalEntry} />
+          <PrivateRoute path='/bucketlist/edit/:id' component={EditJournalEntry} />
           <PrivateRoute path='/bucketlist/share' component={ShareBucketList} />
         </div>
       </div>

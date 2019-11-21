@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 const ViewBucketListItems = () => {
   const Card = styled.div`
     width: 250px;
