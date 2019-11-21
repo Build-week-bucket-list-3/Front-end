@@ -245,16 +245,11 @@ export const Card = Styled.div`
     .card-img-top{
         padding:0;
     }
-    .card-body{
-        a {
-            color:inherit;
-        }
-        padding: .5rem 1rem; 
-    }
+    
     a {
         color:inherit;
-    }
-    p,h3,img{
-       padding: .5rem 1rem;  
-    }
+     }
+     p,h3,img{
+        padding: .5rem 1rem;  
+     }
 `;
