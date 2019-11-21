@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom';
-import {ListContainer, Card} from '../style/GlobalStyles';
+import { ListContainer, Card } from '../style/GlobalStyles';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { BucketListsContext } from '../context/BucketListsContext';
 
 
-  const ViewBucketListItems = (props) => {
-  const [ShowText, setShowText] = useState(true);
+const ViewBucketListItems = (props) => {
   const [items, setItems] = useState([]);
-  const { bucketLists } = useContext(BucketListsContext);
+  const { bucketLists, refreshBucketLists } = useContext(BucketListsContext);
+  const history = useHistory();
   const params = useParams();
 
   useEffect(() => {
@@ -21,28 +21,40 @@ import { BucketListsContext } from '../context/BucketListsContext';
 
   }, []);
 
-  console.log(props);
+  const deleteBucket = event => {
+    event.preventDefault();
+
+    axiosWithAuth()
+      .delete(`/buckets/${params.id}`)
+      .then(() => {
+        refreshBucketLists();
+        history.push(`/bucketlists`);
+      })
+      .catch(err => console.log("error on item delete:", err.message));
+  };
 
   return (
     <div>
-      <div className=''>
-        <h2 className='text-center'>{props.history.location.state.status}</h2>
-        <button className="share btn btn-primary btn-block">
-          share
+      <h2 className='text-center'>{params.title}</h2>
+      <button className="share btn btn-primary btn-block">
+        Share
         </button>
-      </div>
+      <button className="btn btn-secondary btn-block" onClick={deleteBucket}>
+        Delete
+      </button>
       <Link className="createBItem btn btn-secondary btn-block" to={`/bucketlist/create/${params.id}`}>Create a Bucket List Item</Link>
       <ListContainer>
         {
           items.map(item => (
-            <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
-              <Card>
+            <Card>
+              <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
                 {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
                 {console.log(item.photo)}
-                <p>{item.item_name}</p>
+                <h3>{item.item_name}</h3>
                 <p>{item.journal_entry}</p>
-              </Card>
-            </Link>
+                {Boolean(item.completed) && <img src="/images/icon-checkmark.svg" alt="Goal completed" />}
+              </Link>
+            </Card>
           ))
         }
       </ListContainer>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import useForm from 'react-hook-form';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-
 const CreateAccount = (props) => {
 
     const [userCredentials, setUserCredentials] = useState({});
