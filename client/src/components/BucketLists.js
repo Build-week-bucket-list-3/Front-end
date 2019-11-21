@@ -13,8 +13,8 @@ export default function BucketList() {
 
     return (
         <>
-            <h2>My Bucket Lists</h2>
-            <Link to="/bucketlist/new" className="btn btn-secondary">Create a Bucket List</Link>
+            <h2 className="text-center ">My Bucket Lists</h2>
+            <Link to="/bucketlist/new" className="btn btn-secondary btn-block">Create a Bucket List</Link>
 
             {console.log(bucketLists)}
             <ListContainer>

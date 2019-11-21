@@ -200,6 +200,7 @@ export const GlobalStyles = createGlobalStyle`
     .btn-secondary {
         color: #027FA7;
         border: 1px solid #027FA7;
+
     }
     .btn-secondary:hover {
         color: #fff;
@@ -208,6 +209,10 @@ export const GlobalStyles = createGlobalStyle`
     }
     .btn-block {
         width: 100%;
+    }
+    .text-center {
+        text-align:center;
+        margin-bottom:.5rem;
     }
 `;
 

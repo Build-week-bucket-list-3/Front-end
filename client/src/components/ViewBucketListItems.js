@@ -39,6 +39,7 @@ const ViewBucketListItems = (props) => {
             <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
               <Card>
                 {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                {console.log(item.photo)}
                 <p>{item.item_name}</p>
                 <p>{item.journal_entry}</p>
               </Card>
