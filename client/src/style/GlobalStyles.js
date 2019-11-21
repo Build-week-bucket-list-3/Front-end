@@ -246,7 +246,7 @@ export const Card = Styled.div`
     a {
         color:inherit;
     }
-    p,h3{
+    p,h3,img{
        padding:1.5rem 1rem;  
     }
 `;
