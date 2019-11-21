@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import NavBar from "./components/Header";
-import UserLogin from "./components/SignIn";
+import NavBar from './components/Header';
+import UserLogin from './components/SignIn';
 import UserRegistration from "./components/CreateAccount";
-
-import CreateBucketListItem from "./components/CreateBucketListItem";
-import CreateBucketList from "./components/CreateBucketList";
-import EditEntryJournal from "./components/EditEntryJournal";
-import ShareBucketList from "./components/ShareBucketList";
-import AddEntry from "./components/AddEntry";
-import BucketList from "./components/BucketList";
+import BucketLists from "./components/BucketLists";
+import CreateBucketList from './components/CreateBucketList';
+import CreateBucketListItem from './components/CreateBucketListItem';
 import ViewBucketListItems from "./components/ViewBucketListItems";
 import AddJournalEntry from './components/AddJournalEntry';
 import EditJournalEntry from './components/EditJournalEntry';
 import ShareBucketList from './components/ShareBucketList';
+
+import { GlobalStyles } from './style/GlobalStyles';
+import { PrivateRoute } from './utils/PrivateRoute';
+import { BucketListsContext } from './context/BucketListsContext'
+import { axiosWithAuth } from './utils/axiosWithAuth';
 
 
 function App() {
