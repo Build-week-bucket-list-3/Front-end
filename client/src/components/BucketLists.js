@@ -1,48 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { ListContainer, Card } from '../style/GlobalStyles';
+import { BucketListsContext } from '../context/BucketListsContext';
 
 
-export default function BucketList(props) {
-    const [bucketData, setBucketData] = useState([]);
+export default function BucketList() {
+    const { bucketLists, refreshBucketLists } = useContext(BucketListsContext);
     useEffect(() => {
-        axiosWithAuth()
-            .get("/users/all")
-            .then(res => setBucketData(res.data))
-            .catch(err => console.log(err.message));
-
+        refreshBucketLists();
     }, []);
 
     return (
         <>
             <h2>My Bucket Lists</h2>
-            <Link to="/bucketlist/create" className=" btn btn-secondary">Create a Bucket List</Link>
+            <Link to="/bucketlist/new" className="btn btn-secondary">Create a Bucket List</Link>
 
-            {console.log(bucketData)}
+            {console.log(bucketLists)}
             <ListContainer>
 
-                {bucketData.map(item => {
+                {bucketLists.map(item => {
                     return (
-                        <Card key={item.bucketListId}>
-                            <Link to={{ pathname:`bucketlist/view/${item.bucketlistName}` }} >
-                               
+                        <Card key={item.id}>
+                            <Link to={`/bucketlist/${item.id}`}>
                                 <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                                 <div className="card-text">
-                                    <h3>{item.bucketlistName}</h3>
+                                    <h3>{item.title}</h3>
                                 </div>
                             </Link>
                         </Card>);
                 })}
-                {/* <Card>
-                    <Link to='#'>
-                        <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
-                        <div className="card-text">
-                            <h3>List Name</h3>
-                            <p>privacy</p>
-                        </div>
-                    </Link>
-                </Card> */}
 
             </ListContainer>
         </>

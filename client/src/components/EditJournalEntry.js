@@ -1,22 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useHistory } from 'react-router-dom';
 import useForm from "react-hook-form";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { BucketListsContext } from '../context/BucketListsContext';
 
 export default function BucketListEdit() {
   const [ShowText, setShowText] = useState(true);
-  const empty = "";
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
-  // console.log(errors);
+  const params = useParams();
+  const history = useHistory();
+  const { refreshBucketLists } = useContext(BucketListsContext);
+  const { register, handleSubmit, setValue, errors } = useForm();
+
+  const onSubmit = data => {
+    const payload = {
+      bucket_id: params.id,
+      item_name: data.title,
+      completed: data.GoalCompleted,
+      journal_entry: data.EditJournal
+    }
+    axiosWithAuth()
+      .put(`/items/${params.itemId}`, payload)
+      .then(() => {
+        refreshBucketLists();
+        history.push(`/bucketlist/${params.id}`)
+      })
+      .catch(err => console.log('error on item update:', err.message));
+  }
+
+  const deleteItem = event => {
+    event.preventDefault();
+
+    axiosWithAuth()
+      .delete(`/items/${params.itemId}`)
+      .then(() => {
+        refreshBucketLists();
+        history.push(`/bucketlist/${params.id}`);
+      })
+      .catch(err => console.log('error on item delete:', err.message));
+  }
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/items/${params.itemId}`)
+      .then(res => {
+        setValue('title', res.data.item_name);
+        setValue('GoalCompleted', res.data.completed);
+        setValue('EditJournal', res.data.journal_entry);
+        setValue('media', res.data.photo);
+      })
+  }, [])
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* <h2>Edit Bucket List</h2> */}
-      <h2>Edit</h2>
+
+      <h2>Title</h2>
       <div className='form-group'>
-        <select className='form-control' name="ChooseBucketList" ref={register}>
-          <option value="DummyData1">DummyData1</option>
-          <option value="DummyData2">DummyData2</option>
-          <option value="DummyData3">DummyData3</option>
-        </select>
+        <input name='title' className='form-control' type="text" ref={register} />
       </div>
       <div className='form-group'>
         <div className='form-check'>
@@ -31,24 +70,29 @@ export default function BucketListEdit() {
         </div>
       </div>
       <div className='form-group'>
-        <h3>Date:</h3>
-        {ShowText && (
-          <textarea
-            className="form-control"
-            id="journal1"
-            name="EditJournal"
-            ref={register}
-          ></textarea>
-        )}
-        <button className='btn btn-secondary' onClick={() => setShowText(!ShowText)}>X</button>
-
-        <input className='btn btn-primary' type="submit" value="save" />
+        <h3>Journal Entry</h3>
+        <textarea
+          className="form-control"
+          name="EditJournal"
+          ref={register}
+        ></textarea>
       </div>
+      <div className='form-group'>
+        <h3>Photo</h3>
+        <input
+          className="form-control"
+          name="media"
+          ref={register}
+          placeholder="http://"
+        />
+      </div>
+      <button className='btn btn-secondary btn-block' onClick={deleteItem}>Delete</button>
+      <button className='btn btn-primary btn-block' type="submit">Save</button>
     </form>
   );
 }
 
-//need to make sure everyone does npm install react-hook-form
-//still need to add navlinks with router for journal and media
-//still need to fetch all of the real data
-//still need to add a actual grid for media
+    //need to make sure everyone does npm install react-hook-form
+    //still need to add navlinks with router for journal and media
+    //still need to fetch all of the real data
+    //still need to add a actual grid for media

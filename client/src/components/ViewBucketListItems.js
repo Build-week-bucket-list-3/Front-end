@@ -1,53 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams, useHistory } from 'react-router-dom';
 
-import {axiosWithAuth} from "../utils/axiosWithAuth";
+import { ListContainer, Card } from '../style/GlobalStyles';
+
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { BucketListsContext } from '../context/BucketListsContext';
+
 const ViewBucketListItems = (props) => {
-const [ShowText, setShowText] = useState(true);
-const [BlItems, setBlItems] = useState([]);
-
+  const [ShowText, setShowText] = useState(true);
+  const [items, setItems] = useState([]);
+  const { bucketLists } = useContext(BucketListsContext);
+  const params = useParams();
 
   useEffect(() => {
-    let itemName = props.match.params.name.replace(' ', '');
     axiosWithAuth()
-        .get(`/users/bucketlists/view/${itemName}`)
-        .then(res => setBlItems(res.data))
-        .catch(err => console.log(err.message));
+      .get('/items')
+      .then(res => {
+        setItems(res.data.filter(item => `${item.bucket_id}` === params.id));
+      })
+      .catch(err => console.log(err.message));
 
-}, []);
+  }, []);
 
+  console.log(items);
 
   return (
     <div>
-      <span>
-        {ShowText && <h2>Traveling</h2>}
-        {ShowText && (
-          <button className="share btn btn-primary" href="#">
-            share
-          </button>
-        )}
-      </span>
-      <span>
-        <button className="createBItem btn btn-secondary">
-          Create a Bucket List Item
+      <div className=''>
+        <h2>Traveling</h2>
+        <button className="share btn btn-primary">
+          share
         </button>
-        {ShowText && (
-          <button
-            className="delete btn btn-secondary"
-            onClick={() => setShowText(!ShowText)}
-          >
-            Delete
-          </button>
-        )}
-        {ShowText && (
-          <button className="details btn btn-secondary">Details</button>
-        )}
-        {ShowText && <button className="edit btn btn-secondary">Edit</button>}
-      </span>
-      <div>
-       {console.log(BlItems)}
-        
       </div>
-    </div>
+      <Link className="createBItem btn btn-secondary btn-block" to={`/bucketlist/create/${params.id}`}>Create a Bucket List Item</Link>
+      <ListContainer>
+        {
+          items.map(item => (
+            <Link key={item.id} to={`/bucketlist/edit/${params.id}/${item.id}`}>
+              <Card>
+                {Boolean(item.photo) && <img src={item.photo} alt={item.item_name} />}
+                <p>{item.item_name}</p>
+                <p>{item.journal_entry}</p>
+              </Card>
+            </Link>
+          ))
+        }
+      </ListContainer>
+      <div>
+
+      </div>
+    </div >
   );
 };
 export default ViewBucketListItems;
+

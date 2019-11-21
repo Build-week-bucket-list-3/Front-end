@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { axiosLogin as axios } from '../utils/axiosLogin'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { BucketListsContext } from '../context/BucketListsContext';
 
 const SignIn = props => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,6 +10,7 @@ const SignIn = props => {
   });
 
   const history = useHistory();
+  const { getCurrentUser } = useContext(BucketListsContext);
 
   const handleChange = event => {
     setUserCredentials({
@@ -20,18 +22,17 @@ const SignIn = props => {
   const handleSubmit = event => {
     // post request to retrieve a token from the backend
     event.preventDefault();
-    const endpoint = '/login';
+    const endpoint = '/users/login';
 
-    axios().post(endpoint, `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`)
+    axiosWithAuth()
+      .post(endpoint, userCredentials)
       .then(response => {
-        console.log("login response", response.data);
-        const token = response.data.access_token;
-        sessionStorage.setItem('token', token);
+        localStorage.setItem('token', response.data.token);
+        getCurrentUser(userCredentials.username);
         // once token is handeled, navigate to XXX page
         history.push('/bucketlists')
       })
       .catch(error => console.log('login error', error.response));
-
   };
 
   return (
