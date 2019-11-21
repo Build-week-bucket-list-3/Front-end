@@ -1,21 +1,39 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { Link } from "react-router-dom";
+
 const ViewBucketListItems = () => {
-  const Card = styled.div`
-    width: 250px;
-    height: 350px;
-    background: white;
+  const [ShowText, setShowText] = useState(true);
+  const Blheader = styled.div`
+    text-align: center;
+    h2 {
+      margin-bottom: 1rem;
+    }
+  `;
+
+  const ListContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    box-shadow: 5px 10px 5px lightgrey;
-    &:hover {
-      background: lightgrey;
-      box-shadow: 5px 10px 5px grey;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  `;
+  const Card = styled.div`
+    width: 45%;
+    background-color: #e5e5e5;
+    color: #333;
+    margin: 1.8rem 0;
+    box-shadow: 0 0.2rem 0.5rem rgba(000, 000, 000, 0.2);
+    a {
+      color: inherit;
+    }
+    .card-text {
+      h3 {
+        font-weight: 500;
+      }
+      padding: 1.5rem 1rem;
+      text-align: left;
     }
   `;
   const Img = styled.div`
@@ -32,89 +50,80 @@ const ViewBucketListItems = () => {
     align-items: center;
     flex-wrap: wrap;
   `;
-  const [ShowText, setShowText] = useState(true);
+
+  const [BucketListItemData, setBucketListItemData] = useState([]);
+  useEffect(() => {
+    axiosWithAuth()
+      .get("bucketlists/{bucketlistid}/items/")
+      .then(res => setBucketListItemData(res.data))
+      .catch(err => console.log(err.message));
+
+    axiosWithAuth()
+      .get("bucketlists/{bucketlistid}/items/")
+      .then(res => console.log(res))
+      .catch(err =>
+        console.log("there is a error from the axios with auth,", err)
+      );
+  }, []);
   return (
-    <div>
-      <span>
-        {ShowText && <h2>Traveling</h2>}
-        {ShowText && (
-          <button className="share btn btn-primary" href="#">
-            share
-          </button>
-        )}
-      </span>
-      <span>
-        <button className="createBItem btn btn-secondary">
+    <>
+      <Blheader>
+        <h2>Bucket List Items</h2>
+        <Link to="/bucketlist/create/:id" className=" btn btn-secondary">
           Create a Bucket List Item
-        </button>
-        {ShowText && (
-          <button
-            className="delete btn btn-secondary"
-            onClick={() => setShowText(!ShowText)}
-          >
-            Delete
-          </button>
-        )}
-        {ShowText && (
-          <button className="details btn btn-secondary">Details</button>
-        )}
-        {ShowText && <button className="edit btn btn-secondary">Edit</button>}
-      </span>
-      <div>
-        {ShowText && (
-          <Row>
-            <Card className="card">
-              <Img>
-                <img src="images/australia.jpg" />
-              </Img>
-              <h4>Visit Australia</h4>
-              <p>Private</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-            <Card className="card">
-              <Img>
-                <img src="images/england.jpg" />
-              </Img>
-              <h4>Visit England</h4>
-              <p>Private</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-            <Card className="card">
-              <Img>
-                <img src="images/greece.jpg" />
-              </Img>
-              <h4>Visit Greece</h4>
-              <p>Private</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-            <Card className="card">
-              <Img>
-                <img src="images/paris.jpg" />
-              </Img>
-              <h4>Visit Paris</h4>
-              <p>Public</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-            <Card className="card">
-              <Img>
-                <img src="images/ireland.jpg" />
-              </Img>
-              <h4>Visit Ireland</h4>
-              <p>Private</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-            <Card className="card">
-              <Img>
-                <img src="images/mexico.jpg" />
-              </Img>
-              <h4>Visit Mexico</h4>
-              <p>Private</p>
-              <button className="detailsBItem btn btn-primary">Details</button>
-            </Card>
-          </Row>
-        )}
-      </div>
-    </div>
+        </Link>
+      </Blheader>
+      <ListContainer>
+        {ShowText &&
+          BucketListItemData.map(item => {
+            console.log("item:", item);
+            return (
+              <Row>
+                <Card key={item.bucketListId}>
+                  <Link to={`/bucketlist/${item.bucketListId}`}>
+                    <Img>
+                      <img src="../images/mountains.jpg" alt="card img" />
+                    </Img>
+                    <div className="card-text">
+                      <h3>{item.bucketlistName}</h3>
+                    </div>
+                  </Link>
+                </Card>
+              </Row>
+            );
+          })}
+        <div>
+          <span>
+            {ShowText && <h2>Traveling</h2>}
+            {ShowText && (
+              <button className="share btn btn-primary" href="#">
+                share
+              </button>
+            )}
+          </span>
+          <span>
+            <button className="createBItem btn btn-secondary">
+              Create a Bucket List Item
+            </button>
+            {ShowText && (
+              <button
+                className="delete btn btn-secondary"
+                onClick={() => setShowText(!ShowText)}
+              >
+                Delete
+              </button>
+            )}
+            {ShowText && (
+              <button className="details btn btn-secondary">Details</button>
+            )}
+            {ShowText && (
+              <button className="edit btn btn-secondary">Edit</button>
+            )}
+          </span>
+        </div>
+      </ListContainer>
+    </>
   );
 };
+
 export default ViewBucketListItems;

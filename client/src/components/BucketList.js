@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import Styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Blheader = Styled.div`
 
@@ -38,49 +38,56 @@ const Card = Styled.div`
     }
 `;
 
+export default function BucketList(props) {
+  const [bucketData, setBucketData] = useState([]);
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/users/all")
+      .then(res => setBucketData(res.data))
+      .catch(err => console.log(err.message));
+  }, []);
 
-export default function BucketList() {
-    const [bucketData, setBucketData] = useState([]);
-    useEffect(() => {
-        axiosWithAuth()
-            .get("/users/all")
-            .then(res => setBucketData(res.data))
-            .catch(err => console.log(err.message));
+  function getBucketList(event) {
+    event.preventDefault();
 
-    }, []);
+    axiosWithAuth()
+      .get("/users/all")
+      .then(res => console.log(res))
+      .catch(err => console.log(err.message));
+  }
 
-    function getBucketList(event) {
-        event.preventDefault();
-
-        axiosWithAuth()
-            .get("/users/all")
-            .then(res => console.log(res))
-            .catch(err => console.log(err.message));
-    }
-
-    return (
-        <>
-            <Blheader>
-                <h2>My Bucket List</h2>
-                <Link to="/bucketlist/create" className=" btn btn-secondary">Create a Bucket List</Link>
-            </Blheader>
-            {console.log(bucketData)}
-            <ListContainer>
-
-                {bucketData.map(item => {
-                    return (
-                        <Card key={item.bucketListId}>
-                            <Link to='#'>
-                                <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
-                                <div className="card-text">
-                                    <h3>{item.bucketlistName}</h3>
-
-
-                                </div>
-                            </Link>
-                        </Card>);
-                })}
-                {/* <Card>
+  return (
+    <>
+      <Blheader>
+        <h2>My Bucket List</h2>
+        <Link to="/bucketlist/create" className=" btn btn-secondary">
+          Create a Bucket List
+        </Link>
+      </Blheader>
+      {console.log(bucketData)}
+      <ListContainer>
+        {bucketData.map(item => {
+          return (
+            <Card key={item.bucketListId}>
+              <Link
+                to={{
+                  pathname: `/users/bucketlist/${item.bucketListId}`,
+                  state: { status: item.id }
+                }}
+              >
+                {console.log("this is the props", props)}
+                <img
+                  src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                  alt="card img"
+                />
+                <div className="card-text">
+                  <h3>{item.bucketlistName}</h3>
+                </div>
+              </Link>
+            </Card>
+          );
+        })}
+        {/* <Card>
                     <Link to='#'>
                         <img src="https://images.unsplash.com/photo-1574169208538-4f45163ade8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="card img" />
                         <div className="card-text">
@@ -90,13 +97,8 @@ export default function BucketList() {
                     </Link>
                 </Card> */}
 
-
-
-
-                {/* <button onClick={getBucketList}>Test</button> */}
-            </ListContainer>
-        </>
-
-    );
-
+        {/* <button onClick={getBucketList}>Test</button> */}
+      </ListContainer>
+    </>
+  );
 }

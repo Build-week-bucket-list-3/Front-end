@@ -14,7 +14,8 @@ export default function EditEntryJournal() {
           type="text"
           placeholder="EditBucketListName"
           name="EditBucketListName"
-          ref={register}
+          ref={register({ required: true })} />
+          {errors.username && 'A username is required.'}
           placeholder=" Selected Bucket List Name"
         />
       </div>
