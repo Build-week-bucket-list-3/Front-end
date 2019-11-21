@@ -50,7 +50,7 @@ function App() {
           <GlobalStyles />
           <NavBar />
           <div className='container'>
-            <Route path='/Login' render={props => <UserLogin {...props} />} />
+            <Route path='/' render={props => <UserLogin {...props}/> } exact />
             <Route path='/Register' render={props => <UserRegistration {...props} />} />
             <PrivateRoute path='/bucketlists' component={BucketLists} />
             <Switch>
