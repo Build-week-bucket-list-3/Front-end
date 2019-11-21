@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 export const axiosWithAuth = () => {
-    const token = `Bearer ${sessionStorage.getItem('token')}`;
+    const token = localStorage.getItem('token');
 
     return axios.create({
-        baseURL: 'https://gcgsauce-bucketlist.herokuapp.com/',
+        baseURL: 'https://bw-bucketlist.herokuapp.com/api',
         headers: {
-            "Authorization": token
+            Authorization: token
         }
     });
 }

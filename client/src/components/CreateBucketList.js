@@ -22,23 +22,14 @@ const CreateBucketList = props => {
     event.preventDefault();
 
     const payload = {
-      "bucketlistName": userData.name,
+      "title": userData.name,
       "shareable": JSON.stringify(userData.shareable)
     }
 
     axiosWithAuth()
-      .post("/users/bucketlist", payload)
+      .post("/buckets", payload)
       .then(resp => console.log(resp))
       .catch(error => console.log(`error: ${error}`));
-  }
-
-  function getBucketList(event) {
-    event.preventDefault();
-
-    axiosWithAuth()
-      .get("/users/all")
-      .then(res => console.log(res))
-      .catch(err => console.log(err.message));
   }
 
   return (
@@ -75,7 +66,6 @@ const CreateBucketList = props => {
         </div>
       </form>
 
-      <button onClick={getBucketList}>Test</button>
     </div >
   );
 };
