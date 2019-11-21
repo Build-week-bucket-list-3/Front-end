@@ -12,6 +12,8 @@ import AddJournalEntry from './components/AddJournalEntry';
 import EditJournalEntry from './components/EditJournalEntry';
 import ShareBucketList from './components/ShareBucketList';
 
+
+
 import { GlobalStyles } from './style/GlobalStyles';
 import { PrivateRoute } from './utils/PrivateRoute';
 
@@ -24,15 +26,16 @@ function App() {
         <div className='container'>
           <Route path='/Login' render={props => <UserLogin {...props} />} />
           <Route path='/Register' render={props => <UserRegistration {...props} />} />
-          <PrivateRoute path='/bucketlists/' component={BucketLists} />
+          <PrivateRoute path='/bucketlists/' component={props => <BucketLists {...props}/>} />
           <PrivateRoute path='/bucketlist/create' component={CreateBucketList} />
           <PrivateRoute path='/bucketlist/create/:id' component={CreateBucketListItem} />
-          <PrivateRoute path='/bucketlist/view' component={ViewBucketListItems} />
+          <PrivateRoute path='/bucketlist/view/:name' component={ViewBucketListItems} />
           <PrivateRoute path='/bucketlist/add' component={AddJournalEntry} />
           <PrivateRoute path='/bucketlist/edit' component={EditJournalEntry} />
           <PrivateRoute path='/bucketlist/share' component={ShareBucketList} />
         </div>
       </div>
+      
     </Router>
   );
 }
