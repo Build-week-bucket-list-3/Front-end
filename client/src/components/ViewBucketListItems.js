@@ -35,10 +35,10 @@ const ViewBucketListItems = (props) => {
 
   return (
     <div>
-      <h2 className='text-center'>{params.title}</h2>
-      <button className="share btn btn-primary btn-block">
+      <h2 className='text-center'>{params.id}</h2>
+      <Link to={`/bucketlist/share/${params.id}`} className="share btn btn-primary btn-block">
         Share
-        </button>
+        </Link>
       <button className="btn btn-secondary btn-block" onClick={deleteBucket}>
         Delete Bucket List
       </button>
