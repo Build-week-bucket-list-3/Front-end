@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/Header';
@@ -50,7 +50,7 @@ function App() {
           <GlobalStyles />
           <NavBar />
           <div className='container'>
-            <Route path='/' render={props => <UserLogin {...props}/> } exact />
+            <Route path='/' render={props => <UserLogin {...props} />} exact />
             <Route path='/Register' render={props => <UserRegistration {...props} />} />
             <PrivateRoute path='/bucketlists' component={BucketLists} />
             <Switch>
