@@ -21,13 +21,13 @@ import { BucketListsContext } from '../context/BucketListsContext';
 
   }, []);
 
-  console.log(items);
+  console.log(props);
 
   return (
     <div>
       <div className=''>
-        <h2>Travelling</h2>
-        <button className="share btn btn-primary">
+        <h2 className='text-center'>{props.history.location.state.status}</h2>
+        <button className="share btn btn-primary btn-block">
           share
         </button>
       </div>
