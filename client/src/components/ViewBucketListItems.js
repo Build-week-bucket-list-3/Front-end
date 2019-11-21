@@ -35,7 +35,7 @@ const ViewBucketListItems = (props) => {
 
   return (
     <div>
-      <h2 className='text-center'>{params.id}</h2>
+      <h2 className='text-center'></h2>
       <Link to={`/bucketlist/share/${params.id}`} className="share btn btn-primary btn-block">
         Share
         </Link>
